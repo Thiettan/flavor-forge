@@ -1,3 +1,4 @@
+import Input from "./Input";
 const RecipeNameInput = ({ name, handleAddName }) => {
   /*   const [inputValue, setInputValue] = useState("") */
   return (
@@ -7,8 +8,8 @@ const RecipeNameInput = ({ name, handleAddName }) => {
       <label htmlFor="RecipeForger-RecipeName" className="hidden">
         Recipe Name
       </label>
-      <input
-        className="border dark:border-b-gray-300 rounded-lg focus:ring-blue-500 w-full mt-1"
+
+      <Input
         id="RecipeForger-RecipeName"
         name="RecipeName"
         type="text"

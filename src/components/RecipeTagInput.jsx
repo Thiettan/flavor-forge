@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AddBtn from "./AddBtn";
+import Input from "./Input";
 
 const RecipeTagInput = ({ tag, handleAddTag }) => {
   const [inputValue, setInputValue] = useState("");
@@ -11,13 +12,11 @@ const RecipeTagInput = ({ tag, handleAddTag }) => {
         Recipe Tag
       </label>
       <div className="flex">
-        <input
-          className="border dark:border-b-gray-300 rounded-lg focus:ring-blue-500 w-full mt-1"
+        <Input
           id="RecipeForger-RecipeTag"
           name="RecipeTag"
           type="text"
           placeholder=""
-          value={inputValue}
           onChange={(e) => {
             setInputValue(e.target.value);
           }}

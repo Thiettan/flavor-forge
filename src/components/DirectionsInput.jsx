@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddBtn from "./AddBtn";
 
 const DirectionsInput = ({ directions, handleAddDirections }) => {
   const [inputValue, setInputValue] = useState("");
@@ -21,14 +22,15 @@ const DirectionsInput = ({ directions, handleAddDirections }) => {
           setInputValue(e.target.value);
         }}
       />
-      <button
-        className=""
+
+      <AddBtn
+        variant="primary"
         onClick={(e) => {
           handleAddDirections(e, inputValue);
         }}
       >
         +
-      </button>
+      </AddBtn>
 
       {/* Show list of added ingredients */}
       <ol className="mt-4 list-decimal list-inside text-sm">
