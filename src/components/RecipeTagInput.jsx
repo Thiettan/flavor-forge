@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddBtn from "./AddBtn";
 
 const RecipeTagInput = ({ tag, handleAddTag }) => {
   const [inputValue, setInputValue] = useState("");
@@ -21,14 +22,14 @@ const RecipeTagInput = ({ tag, handleAddTag }) => {
             setInputValue(e.target.value);
           }}
         />
-        <button
-          className=""
+        <AddBtn
+          variant="primary"
           onClick={(e) => {
             handleAddTag(e, inputValue);
           }}
         >
           +
-        </button>
+        </AddBtn>
       </div>
       <ul className="mt-4 list-disc list-inside text-sm">
         {tag.map((item, idx) => (
