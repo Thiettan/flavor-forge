@@ -9,13 +9,15 @@ import "./App.css";
 
 //TEST DATA Imports//
 import testTagData from "./data/recipe-tags-test.json";
+import testIngredientData from "./data/recipe-ingredients-test.json";
+import testDirectionData from "./data/recipe-directions-test.json";
 /////////////////////
 
 function App() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState("French Omelette");
   const [tag, setTag] = useState(testTagData);
-  const [ingredients, setIngredients] = useState([]);
-  const [directions, setDirections] = useState([]);
+  const [ingredients, setIngredients] = useState(testIngredientData);
+  const [directions, setDirections] = useState(testDirectionData);
 
   function handleAddName(e, newName) {
     e.preventDefault();

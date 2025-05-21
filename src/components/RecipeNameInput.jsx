@@ -13,7 +13,8 @@ const RecipeNameInput = ({ name, handleAddName }) => {
         id="RecipeForger-RecipeName"
         name="RecipeName"
         type="text"
-        placeholder={name}
+        placeholder="Name your masterpiece"
+        value={name}
         onChange={(e) => {
           handleAddName(e, e.target.value);
         }}

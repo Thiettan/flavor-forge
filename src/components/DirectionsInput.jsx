@@ -35,7 +35,9 @@ const DirectionsInput = ({ directions, handleAddDirections }) => {
       {/* Show list of added ingredients */}
       <ol className="mt-4 list-decimal list-inside text-sm">
         {directions.map((item, idx) => (
-          <li key={idx}>{item}</li>
+          <li className="" key={idx}>
+            <span className="indent-1 inline-block">{item}</span>
+          </li>
         ))}
       </ol>
     </div>
