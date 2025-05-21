@@ -30,9 +30,14 @@ const RecipeTagInput = ({ tag, handleAddTag }) => {
           +
         </AddBtn>
       </div>
-      <ul className="mt-4 list-disc list-inside text-sm">
+      <ul className="mt-4 list-none text-sm flex ">
         {tag.map((item, idx) => (
-          <li key={idx}>{item}</li>
+          <li
+            className="mr-2 p-1 bg-white dark:bg-orange-900 rounded-lg"
+            key={idx}
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </div>

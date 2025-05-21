@@ -7,9 +7,13 @@ import IngredientInput from "./components/IngredientInput";
 import DirectionsInput from "./components/DirectionsInput";
 import "./App.css";
 
+//TEST DATA Imports//
+import testTagData from "./data/recipe-tags-test.json";
+/////////////////////
+
 function App() {
   const [name, setName] = useState("");
-  const [tag, setTag] = useState([]);
+  const [tag, setTag] = useState(testTagData);
   const [ingredients, setIngredients] = useState([]);
   const [directions, setDirections] = useState([]);
 
@@ -36,8 +40,8 @@ function App() {
   return (
     <>
       <h1 className="text-6xl text-center">Flavor Forge</h1>
-      <div className="@container">
-        <form action="" id="RecipeForger" className="max-w-md mx-auto">
+      <div className="@container max-w-5xl mx-auto">
+        <form action="" id="RecipeForger" className="max-w-full mx-auto">
           <h2 className="text-xl mb-5">Form Heading 2</h2>
 
           <RecipeNameInput name={name} handleAddName={handleAddName} />
