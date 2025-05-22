@@ -1,10 +1,11 @@
 import { useState } from "react";
 import AddBtn from "./AddBtn";
 import Input from "./Input";
+import { IngredientList } from "./IngredientList";
 
 const IngredientInput = ({ ingredients, handleAddIngredient }) => {
   const [inputValue, setInputValue] = useState("");
-
+  console.log(ingredients);
   return (
     <div className="mb-5">
       <h3 className="text-2xl mb-3">Ingredients</h3>
@@ -40,12 +41,7 @@ const IngredientInput = ({ ingredients, handleAddIngredient }) => {
           +
         </AddBtn>
       </div>
-      {/* Show list of added ingredients */}
-      <ul className="mt-4 list-disc list-inside text-sm">
-        {ingredients.map((item, idx) => (
-          <li key={idx}>{item}</li>
-        ))}
-      </ul>
+      <IngredientList ingredients={ingredients} />
     </div>
   );
 };
