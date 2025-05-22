@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddBtn from "./components/AddBtn";
 import RecipeNameInput from "./components/RecipeNameInput";
+import RecipeDescriptionInput from "./components/RecipeDescriptionInput";
 import RecipeTagInput from "./components/RecipeTagInput";
 import RecipeImgInput from "./components/RecipeImgInput";
 import IngredientInput from "./components/IngredientInput";
@@ -20,9 +21,14 @@ import testDirectionData from "./data/recipe-directions-test.json";
 function App() {
   const [name, setName] = useState("French Omelette");
   const [tag, setTag] = useState(testTagData);
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [ingredients, setIngredients] = useState(testIngredientData);
   const [directions, setDirections] = useState(testDirectionData);
+
+  useEffect(() => {
+    console.log("Ingredients state updated:", ingredients);
+  }, [ingredients]);
 
   const handleSaveRecipe = () => {
     //insert form validation here
@@ -35,6 +41,7 @@ function App() {
     const compiledRecipe = {
       name: name.trim(),
       tag: trimArray(tag), // trimmed array of tag strings
+      description: description,
       ingredients: ingredients,
       directions: directions,
       image: image,
@@ -65,6 +72,11 @@ function App() {
     setTag([...tag, newTag]);
   }
 
+  function handleAddDescription(e, newDescription) {
+    e.preventDefault();
+    setDescription(newDescription);
+  }
+
   function handleAddImage(e, newImg) {
     e.preventDefault();
     setImage(newImg);
@@ -90,6 +102,11 @@ function App() {
           <RecipeNameInput name={name} handleAddName={handleAddName} />
 
           <RecipeTagInput tag={tag} handleAddTag={handleAddTag} />
+
+          <RecipeDescriptionInput
+            description={description}
+            handleAddDescription={handleAddDescription}
+          />
 
           <RecipeImgInput image={image} handleAddImage={handleAddImage} />
 
