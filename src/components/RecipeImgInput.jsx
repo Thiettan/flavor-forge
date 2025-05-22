@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const RecipeImgInput = ({ image, handleAddImage }) => {
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(image);
 
   const handleImageChange = (file) => {
     if (!file) return; // failsafe in case if user cancels
