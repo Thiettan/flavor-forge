@@ -7,16 +7,15 @@ import IngredientInput from "./components/IngredientInput";
 import DirectionsInput from "./components/DirectionsInput";
 import "./App.css";
 
-// ========================
-// 🔧 Helper Functions
+// 🔧 Helper Functions ====
 import { trimArray } from "./util/helper-functions";
 // ========================
 
-//TEST DATA Imports//
+// Test Data ==============
 import testTagData from "./data/recipe-tags-test.json";
 import testIngredientData from "./data/recipe-ingredients-test.json";
 import testDirectionData from "./data/recipe-directions-test.json";
-/////////////////////
+// ========================
 
 function App() {
   const [name, setName] = useState("French Omelette");
@@ -35,7 +34,7 @@ function App() {
 
     const compiledRecipe = {
       name: name.trim(),
-      tag: trimArray(tag), // <----------- add trim() using map() here
+      tag: trimArray(tag), // trimmed array of tag strings
       ingredients: ingredients,
       directions: directions,
       image: image,
@@ -66,7 +65,8 @@ function App() {
     setTag([...tag, newTag]);
   }
 
-  function handleAddImage(newImg) {
+  function handleAddImage(e, newImg) {
+    e.preventDefault();
     setImage(newImg);
   }
 

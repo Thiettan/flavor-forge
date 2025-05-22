@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ImagePreview } from "./ImagePreview";
 
 const RecipeImgInput = ({ image, handleAddImage }) => {
   const [preview, setPreview] = useState(image);
@@ -13,11 +14,11 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
     }
 
     const reader = new FileReader();
-    reader.onloadend = () => {
+    reader.onloadend = (e) => {
       // callback func
       // below executes after FileReader finishes
       setPreview(reader.result);
-      handleAddImage(reader.result);
+      handleAddImage(e, reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -26,7 +27,7 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
     e.preventDefault();
     e.stopPropagation();
     const file = e.dataTransfer.files[0];
-    handleImageChange(file);
+    handleImageChange(e, file);
   };
 
   const handleDragOver = (e) => {
@@ -40,11 +41,13 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
       <hr className="mb-3" />
       <label htmlFor="RecipeForger-RecipeImage">Choose an image:</label>
 
-      {preview && (
-        <div className="mt-4">
-          <p className="text-sm mb-2">Image Preview:</p>
-          <img src={preview} alt="Preview" className="w-full rounded border" />
-        </div>
+      {preview && ( //if preview is true, render below
+        <ImagePreview
+          preview={preview}
+          forging={true}
+          handleAddImage={handleAddImage}
+          setPreview={setPreview}
+        />
       )}
 
       <div
