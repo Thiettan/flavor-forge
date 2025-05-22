@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const RecipeImgInput = () => {
+const RecipeImgInput = ({ image, handleAddImage }) => {
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = (file) => {
@@ -17,6 +17,7 @@ const RecipeImgInput = () => {
       // callback func
       // below executes after FileReader finishes
       setPreview(reader.result);
+      handleAddImage(reader.result);
     };
     reader.readAsDataURL(file);
   };

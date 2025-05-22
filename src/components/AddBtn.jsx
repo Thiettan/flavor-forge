@@ -16,6 +16,7 @@ const AddBtn = ({
     secondary:
       "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400",
     danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500",
+    save: "bg-orange-600 text-white hover:bg-orange-700 focus:ring-orange-500",
   };
 
   return (
