@@ -7,6 +7,11 @@ import IngredientInput from "./components/IngredientInput";
 import DirectionsInput from "./components/DirectionsInput";
 import "./App.css";
 
+// ========================
+// 🔧 Helper Functions
+import { trimArray } from "./util/helper-functions";
+// ========================
+
 //TEST DATA Imports//
 import testTagData from "./data/recipe-tags-test.json";
 import testIngredientData from "./data/recipe-ingredients-test.json";
@@ -23,16 +28,31 @@ function App() {
   const handleSaveRecipe = () => {
     //insert form validation here
     const formValid = true;
-    if (!formValid) return;
+    if (!formValid) {
+      alert("Please fill out all required fields.");
+      return;
+    }
 
     const compiledRecipe = {
-      name: name,
-      tag: tag,
+      name: name.trim(),
+      tag: trimArray(tag), // <----------- add trim() using map() here
       ingredients: ingredients,
       directions: directions,
       image: image,
     };
     console.log(compiledRecipe);
+
+    const storedBookString = localStorage.getItem("recipeBook");
+
+    if (storedBookString) {
+      const storedBook = JSON.parse(storedBookString);
+      console.log(storedBook); // array of recipe objects
+      storedBook.push(compiledRecipe);
+      localStorage.setItem("recipeBook", JSON.stringify(storedBook));
+    } else {
+      const recipeBook = [compiledRecipe];
+      localStorage.setItem("recipeBook", JSON.stringify(recipeBook));
+    }
   };
 
   function handleAddName(e, newName) {
@@ -42,6 +62,7 @@ function App() {
 
   function handleAddTag(e, newTag) {
     e.preventDefault();
+
     setTag([...tag, newTag]);
   }
 
