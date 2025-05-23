@@ -9,9 +9,15 @@ export const ImagePreview = ({
   return (
     <div className="mt-4">
       <p className="text-sm mb-2">Image Preview:</p>
-      <div className="container relative ">
+      <div className="relative ">
         {previewImg && (
-          <img src={previewImg} alt="Preview" className="w-full" />
+          <>
+            <img
+              className="w-full aspect-[4/3] object-cover rounded-lg"
+              src={previewImg}
+              alt=""
+            />
+          </>
         )}
         {/* if in Recipe Forger && preview has img data; render button below */}
         {forging && previewImg && (

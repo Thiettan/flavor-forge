@@ -81,7 +81,7 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
                 and drop
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                PNG or JPG (MAX. 800x400px)
+                PNG or JPG (MAX. 1MB)
               </p>
             </div>
             <input

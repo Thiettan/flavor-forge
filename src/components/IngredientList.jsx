@@ -2,16 +2,16 @@
 import React from "react";
 import RemoveBtn from "./ui/RemoveBtn";
 export const IngredientList = React.memo(
-  ({ ingredients, editMode, setIngredients }) => {
+  ({ ingredients, editMode, setIngredients, className }) => {
     console.log("IngredientList rendered", ingredients);
 
     const handleRemove = (itemToRemove) => {
       setIngredients(ingredients.filter((item) => item !== itemToRemove));
     };
     return (
-      <ul className="mt-4 list-disc list-inside text-sm">
+      <ul className={`mt-4 list-disc list-inside text-sm ${className}`}>
         {ingredients.map((item, idx) => (
-          <li key={idx} className="relative">
+          <li key={idx} className="relative my-2">
             {item}
             {editMode && (
               <RemoveBtn
