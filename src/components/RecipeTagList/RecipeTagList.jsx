@@ -1,12 +1,19 @@
-export const RecipeTagList = ({ tag }) => {
+import RemoveBtn from "../ui/RemoveBtn";
+
+export const RecipeTagList = ({ tag, editMode, setTag }) => {
+  //TO DO
+  const handleRemove = (itemToRemove) => {
+    setTag(tag.filter((item) => item !== itemToRemove));
+  };
   return (
-    <ul className="my-4 list-none text-sm flex ">
+    <ul className="my-4 list-none text-sm flex flex-wrap">
       {tag.map((item, idx) => (
         <li
-          className="mr-2 p-1 bg-white dark:bg-orange-900 rounded-lg"
+          className="relative mr-2 p-1 text-sm bg-white dark:bg-orange-900 rounded-lg"
           key={idx}
         >
           {item}
+          {editMode && <RemoveBtn onClick={() => handleRemove(item)} />}
         </li>
       ))}
     </ul>

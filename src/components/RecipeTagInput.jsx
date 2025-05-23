@@ -3,7 +3,7 @@ import AddBtn from "./AddBtn";
 import Input from "./Input";
 import { RecipeTagList } from "./RecipeTagList/RecipeTagList";
 
-const RecipeTagInput = ({ tag, handleAddTag }) => {
+const RecipeTagInput = ({ tag, handleAddTag, setTag }) => {
   const [inputValue, setInputValue] = useState("");
   return (
     <div className="mb-5">
@@ -31,7 +31,7 @@ const RecipeTagInput = ({ tag, handleAddTag }) => {
           +
         </AddBtn>
       </div>
-      <RecipeTagList tag={tag} />
+      <RecipeTagList tag={tag} editMode={true} setTag={setTag} />
     </div>
   );
 };

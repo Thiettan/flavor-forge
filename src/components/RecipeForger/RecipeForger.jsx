@@ -9,6 +9,9 @@ import DirectionsInput from "../DirectionsInput";
 
 import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
 
+// 🔧 Test Component =====
+import TestComponent from "../TestComponent";
+
 // 🔧 Helper Functions ====
 import { trimArray, getLocalStorage } from "../../util/helper-functions";
 // ========================
@@ -70,7 +73,6 @@ const RecipeForger = () => {
 
   function handleAddTag(e, newTag) {
     e.preventDefault();
-
     setTag([...tag, newTag]);
   }
 
@@ -105,7 +107,11 @@ const RecipeForger = () => {
 
             <RecipeNameInput name={name} handleAddName={handleAddName} />
 
-            <RecipeTagInput tag={tag} handleAddTag={handleAddTag} />
+            <RecipeTagInput
+              tag={tag}
+              handleAddTag={handleAddTag}
+              setTag={setTag}
+            />
 
             <RecipeDescriptionInput
               description={description}
@@ -133,7 +139,7 @@ const RecipeForger = () => {
           </form>
         </div>
       </div>
-      <RecipeDisplay props={test[test.length - 1]} />
+      {test && <RecipeDisplay props={test[test.length - 1]} />}
     </>
   );
 };
