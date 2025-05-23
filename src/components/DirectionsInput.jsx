@@ -2,7 +2,11 @@ import { useState } from "react";
 import AddBtn from "./AddBtn";
 import { DirectionsList } from "./DirectionsList";
 
-const DirectionsInput = ({ directions, handleAddDirections }) => {
+const DirectionsInput = ({
+  directions,
+  handleAddDirections,
+  setDirections,
+}) => {
   const [inputValue, setInputValue] = useState("");
 
   return (
@@ -33,7 +37,11 @@ const DirectionsInput = ({ directions, handleAddDirections }) => {
         +
       </AddBtn>
 
-      <DirectionsList directions={directions} />
+      <DirectionsList
+        directions={directions}
+        setDirections={setDirections}
+        editMode={true}
+      />
     </div>
   );
 };

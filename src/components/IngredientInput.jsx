@@ -3,7 +3,11 @@ import AddBtn from "./AddBtn";
 import Input from "./Input";
 import { IngredientList } from "./IngredientList";
 
-const IngredientInput = ({ ingredients, handleAddIngredient }) => {
+const IngredientInput = ({
+  ingredients,
+  handleAddIngredient,
+  setIngredients,
+}) => {
   const [inputValue, setInputValue] = useState("");
   console.log(ingredients);
   return (
@@ -41,7 +45,11 @@ const IngredientInput = ({ ingredients, handleAddIngredient }) => {
           +
         </AddBtn>
       </div>
-      <IngredientList ingredients={ingredients} />
+      <IngredientList
+        ingredients={ingredients}
+        setIngredients={setIngredients}
+        editMode={true}
+      />
     </div>
   );
 };

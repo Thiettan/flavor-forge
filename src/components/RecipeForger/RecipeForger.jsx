@@ -102,7 +102,7 @@ const RecipeForger = () => {
       <div className="recipe-forger">
         <h1 className="text-6xl text-center">Flavor Forge</h1>
         <div className="@container max-w-5xl mx-auto">
-          <form action="" id="RecipeForger" className="max-w-full mx-auto">
+          <form action="" id="RecipeForger" className="max-w-full mx-auto p-4">
             <h2 className="text-xl mb-5">Form Heading 2</h2>
 
             <RecipeNameInput name={name} handleAddName={handleAddName} />
@@ -123,10 +123,12 @@ const RecipeForger = () => {
             <IngredientInput
               ingredients={ingredients}
               handleAddIngredient={handleAddIngredient}
+              setIngredients={setIngredients}
             />
             <DirectionsInput
               directions={directions}
               handleAddDirections={handleAddDirections}
+              setDirections={setDirections}
             />
 
             <AddBtn

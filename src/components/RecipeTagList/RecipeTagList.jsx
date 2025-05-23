@@ -13,7 +13,12 @@ export const RecipeTagList = ({ tag, editMode, setTag }) => {
           key={idx}
         >
           {item}
-          {editMode && <RemoveBtn onClick={() => handleRemove(item)} />}
+          {editMode && (
+            <RemoveBtn
+              onClick={() => handleRemove(item)}
+              className="-top-1 -right-1"
+            />
+          )}
         </li>
       ))}
     </ul>
