@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "./ui/Input";
 const RecipeNameInput = ({ name, handleAddName }) => {
   /*   const [inputValue, setInputValue] = useState("") */
   return (

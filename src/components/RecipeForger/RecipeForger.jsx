@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import AddBtn from "../AddBtn";
+import AddBtn from "../ui/AddBtn";
 import RecipeNameInput from "../RecipeNameInput";
 import RecipeDescriptionInput from "../RecipeDescriptionInput";
 import RecipeTagInput from "../RecipeTagInput";

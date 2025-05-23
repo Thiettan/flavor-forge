@@ -27,7 +27,7 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
     e.preventDefault();
     e.stopPropagation();
     const file = e.dataTransfer.files[0];
-    handleImageChange(e, file);
+    handleImageChange(file);
   };
 
   const handleDragOver = (e) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddBtn from "./AddBtn";
+import AddBtn from "./ui/AddBtn";
 import { DirectionsList } from "./DirectionsList";
 
 const DirectionsInput = ({
