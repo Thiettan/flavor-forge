@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+  --color-slate: #123340;
+  --color-lemon: #F2BC1B;
+  --color-tangerine-100: #F27D16;
+  --color-tangerine-200: #FF5F1B;
+  --color-tangerine-300: #AA3503;
+  --color-paprika: #A61103;
+  --color-cinnamon: #590202;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -55,10 +65,10 @@ button {
 button:hover {
   border-color: #646cff;
 }
-button:focus,
+/* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
+} */
 
 @media (prefers-color-scheme: light) {
   :root {

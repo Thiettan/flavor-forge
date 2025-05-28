@@ -1,6 +1,7 @@
 import { DirectionsList } from "../DirectionsList";
 import { IngredientList } from "../IngredientList";
 import { RecipeTagList } from "../RecipeTagList/RecipeTagList";
+import ActionBtn from "../ui/ActionBtn";
 import { useState } from "react";
 
 const RecipeDisplay = ({ ...props }) => {
@@ -14,13 +15,14 @@ const RecipeDisplay = ({ ...props }) => {
       <div className="container mx-auto">
         <h2 className="text-6xl">{Recipe.name}</h2>
         <div>
-          <button
+          <ActionBtn
+            className="primary"
             onClick={() => {
               toggleShowCheckbox(!showCheckbox);
             }}
           >
             Toggle
-          </button>
+          </ActionBtn>
           <RecipeTagList tag={Recipe.tag} />
         </div>
 
