@@ -7,13 +7,11 @@ import RecipeImgInput from "../RecipeImgInput";
 import IngredientInput from "../IngredientInput";
 import DirectionsInput from "../DirectionsInput";
 
-import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
-
 // 🔧 Test Component =====
 import TestComponent from "../TestComponent";
 
 // 🔧 Helper Functions ====
-import { trimArray, getLocalStorage } from "../../util/helper-functions";
+import { trimArray } from "../../util/helper-functions";
 // ========================
 
 // Test Data ==============
@@ -96,7 +94,6 @@ const RecipeForger = () => {
     setDirections([...directions, newDirections]);
   }
 
-  const test = getLocalStorage("recipeBook");
   return (
     <>
       <div className="recipe-forger">
@@ -141,7 +138,6 @@ const RecipeForger = () => {
           </form>
         </div>
       </div>
-      {test && <RecipeDisplay props={test[test.length - 1]} />}
     </>
   );
 };

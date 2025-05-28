@@ -1,15 +1,28 @@
 import { DirectionsList } from "../DirectionsList";
 import { IngredientList } from "../IngredientList";
 import { RecipeTagList } from "../RecipeTagList/RecipeTagList";
+import { useState } from "react";
 
 const RecipeDisplay = ({ ...props }) => {
   const Recipe = props.props;
   console.log(Recipe);
+
+  const [showCheckbox, toggleShowCheckbox] = useState(false);
+
   return (
     <div className="RecipeDisplay">
       <div className="container mx-auto">
         <h2 className="text-6xl">{Recipe.name}</h2>
-        <RecipeTagList tag={Recipe.tag} />
+        <div>
+          <button
+            onClick={() => {
+              toggleShowCheckbox(!showCheckbox);
+            }}
+          >
+            Toggle
+          </button>
+          <RecipeTagList tag={Recipe.tag} />
+        </div>
 
         <img
           src={Recipe.image}
@@ -22,6 +35,7 @@ const RecipeDisplay = ({ ...props }) => {
           <hr />
           <IngredientList
             ingredients={Recipe.ingredients}
+            showCheckbox={showCheckbox}
             className="py-2 px-2"
           />
         </section>
@@ -30,6 +44,7 @@ const RecipeDisplay = ({ ...props }) => {
           <hr />
           <DirectionsList
             directions={Recipe.directions}
+            showCheckbox={showCheckbox}
             className="py-2 px-2"
           />
         </section>
