@@ -2,6 +2,7 @@ import { DirectionsList } from "../DirectionsList";
 import { IngredientList } from "../IngredientList";
 import { RecipeTagList } from "../RecipeTagList/RecipeTagList";
 import ActionBtn from "../ui/ActionBtn";
+import IconBtn from "../ui/IconBtn";
 import ToggleBtn from "../ui/ToggleBtn";
 import { useState } from "react";
 import PrintIcon from "../ui/icons/PrintIcon";
@@ -19,14 +20,15 @@ const RecipeDisplay = ({ ...props }) => {
         <div className="flex justify-between items-center">
           <RecipeTagList tag={Recipe.tag} />
           <div className="flex justify-between items-center gap-4">
-            <ActionBtn
+            <IconBtn
               className="primary"
+              variant="utility"
               onClick={() => {
                 window.print();
               }}
             >
-              <PrintIcon className="h-[2em] flex items-center justify-center" />
-            </ActionBtn>
+              <PrintIcon className="h-[1.5em] w-[1.5em] flex items-center justify-center" />
+            </IconBtn>
             <ToggleBtn
               onChange={(e) => {
                 toggleShowCheckbox(e.target.checked);
@@ -41,7 +43,7 @@ const RecipeDisplay = ({ ...props }) => {
         {Recipe.image && (
           <img
             src={Recipe.image}
-            alt="Preview"
+            alt={`Preview image of ${Recipe.name}`}
             className="w-full aspect-[4/3] object-cover rounded-lg"
           />
         )}
