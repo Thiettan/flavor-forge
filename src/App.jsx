@@ -10,7 +10,7 @@ const test = getLocalStorage("recipeBook");
 function App() {
   return (
     <>
-      {/*   <RecipeForger /> */}
+      <RecipeForger />
       {test && <RecipeDisplay props={test[test.length - 1]} />}
     </>
   );

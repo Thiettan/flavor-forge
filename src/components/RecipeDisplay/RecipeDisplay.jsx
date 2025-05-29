@@ -6,6 +6,7 @@ import IconBtn from "../ui/IconBtn";
 import ToggleBtn from "../ui/ToggleBtn";
 import { useState } from "react";
 import PrintIcon from "../ui/icons/PrintIcon";
+import RecipeDate from "../RecipeDate";
 
 const RecipeDisplay = ({ ...props }) => {
   const Recipe = props.props;
@@ -18,7 +19,10 @@ const RecipeDisplay = ({ ...props }) => {
       <div className="container mx-auto">
         <h2 className="text-6xl">{Recipe.name}</h2>
         <div className="flex justify-between items-center">
-          <RecipeTagList tag={Recipe.tag} />
+          <div className="flex justify-between items-center gap-4">
+            {Recipe.createdAt && <RecipeDate date={Recipe.createdAt} />}
+            <RecipeTagList tag={Recipe.tag} />
+          </div>
           <div className="flex justify-between items-center gap-4">
             <IconBtn
               className="primary"

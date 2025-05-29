@@ -41,12 +41,14 @@ const RecipeForger = () => {
     }
 
     const compiledRecipe = {
+      id: crypto.randomUUID(), //generate unique id
       name: name.trim(),
       tag: trimArray(tag), // trimmed array of tag strings
       description: description,
       ingredients: ingredients,
       directions: directions,
       image: image,
+      createdAt: new Date().toISOString(),
     };
 
     console.log(compiledRecipe);
