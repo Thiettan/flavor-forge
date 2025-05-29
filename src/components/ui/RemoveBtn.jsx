@@ -7,8 +7,10 @@ const RemoveBtn = ({
   className = "", //destructuring syntax a default string to avoid undefined
   ...props //Captures any extra props for flexibility
 }) => {
+  /*     const baseStyles =
+    "bg-transparent text-white rounded-full flex items-center justify-center w-[1rem] h-[1rem] text-xs font-bold cursor-pointer text-center absolute "; */
   const baseStyles =
-    "bg-transparent text-white rounded-full flex items-center justify-center w-[1rem] h-[1rem] text-xs font-bold cursor-pointer text-center absolute ";
+    "bg-transparent text-white rounded-full flex items-center justify-center w-[1rem] h-[1rem] text-xs font-bold cursor-pointer text-center";
 
   const variants = {
     primary:
