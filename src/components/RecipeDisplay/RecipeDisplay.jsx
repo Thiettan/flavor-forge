@@ -38,11 +38,14 @@ const RecipeDisplay = ({ ...props }) => {
           </div>
         </div>
 
-        <img
-          src={Recipe.image}
-          alt="Preview"
-          className="w-full aspect-[4/3] object-cover rounded-lg"
-        />
+        {Recipe.image && (
+          <img
+            src={Recipe.image}
+            alt="Preview"
+            className="w-full aspect-[4/3] object-cover rounded-lg"
+          />
+        )}
+
         <p className="my-6">{Recipe.description}</p>
         <section className="my-4">
           <h3 className="text-2xl mb-2">Ingredients</h3>
