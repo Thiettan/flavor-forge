@@ -4,6 +4,7 @@ import { RecipeTagList } from "../RecipeTagList/RecipeTagList";
 import ActionBtn from "../ui/ActionBtn";
 import ToggleBtn from "../ui/ToggleBtn";
 import { useState } from "react";
+import PrintIcon from "../ui/icons/PrintIcon";
 
 const RecipeDisplay = ({ ...props }) => {
   const Recipe = props.props;
@@ -15,17 +16,26 @@ const RecipeDisplay = ({ ...props }) => {
     <div className="RecipeDisplay">
       <div className="container mx-auto">
         <h2 className="text-6xl">{Recipe.name}</h2>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <RecipeTagList tag={Recipe.tag} />
-
-          <ToggleBtn
-            onChange={(e) => {
-              toggleShowCheckbox(e.target.checked);
-            }}
-            checked={showCheckbox}
-          >
-            Checklist
-          </ToggleBtn>
+          <div className="flex justify-between items-center gap-4">
+            <ActionBtn
+              className="primary"
+              onClick={() => {
+                window.print();
+              }}
+            >
+              <PrintIcon className="h-[2em] flex items-center justify-center" />
+            </ActionBtn>
+            <ToggleBtn
+              onChange={(e) => {
+                toggleShowCheckbox(e.target.checked);
+              }}
+              checked={showCheckbox}
+            >
+              Checklist
+            </ToggleBtn>
+          </div>
         </div>
 
         <img

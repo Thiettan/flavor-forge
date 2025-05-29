@@ -6,7 +6,7 @@ const ActionBtn = ({
   ...props //Captures any extra props for flexibility
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center px-4 py-2 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition";
+    "inline-flex items-center justify-center px-4 py-1 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 transition";
 
   const variants = {
     primary:
