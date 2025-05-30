@@ -1,6 +1,9 @@
-export default function RecipeCard({ recipe, i }) {
+export default function RecipeCard({ recipe, i, setActiveRecipe }) {
   return (
     <div
+      onClick={() => {
+        setActiveRecipe(i);
+      }}
       className="relative w-64 h-64 rounded-lg overflow-hidden group cursor-pointer"
       key={`card-${i}`}
     >
