@@ -3,15 +3,20 @@ import RecipeDisplay from "./components/RecipeDisplay/RecipeDisplay";
 
 // 🔧 Helper Functions ====
 import { getLocalStorage } from "./util/helper-functions";
+import RecipeCarousel from "./components/RecipeCarousel/RecipeCarousel";
 // ========================
 
-const test = getLocalStorage("recipeBook");
+const recipeBook = getLocalStorage("recipeBook");
 
 function App() {
   return (
     <>
-      <RecipeForger />
-      {test && <RecipeDisplay props={test[test.length - 1]} />}
+      <h1 className="text-center">Flavor Forge</h1>
+      <RecipeCarousel recipeBook={recipeBook} />
+      {/*  <RecipeForger /> */}
+      {recipeBook && (
+        <RecipeDisplay props={recipeBook[recipeBook.length - 1]} />
+      )}
     </>
   );
 }

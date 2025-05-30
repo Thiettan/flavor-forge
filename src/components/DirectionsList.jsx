@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import RemoveBtn from "./ui/RemoveBtn";
 import Checkbox from "./ui/Checkbox";
 import IconBtn from "./ui/IconBtn";
+import EditIcon from "./ui/icons/EditIcon";
 
 export const DirectionsList = ({
   directions,
@@ -15,7 +16,7 @@ export const DirectionsList = ({
   const [editingValue, setEditingValue] = useState("");
   const inputRef = useRef(null);
 
-  // Focus the input field automatically when editing starts
+  // Focus the input field automatically after rendering new input & when editing starts
   useEffect(() => {
     if (editingIndex !== null && inputRef.current) {
       inputRef.current.focus();
@@ -106,7 +107,7 @@ export const DirectionsList = ({
                 {editMode && (
                   <div className="flex gap-2 items-center justify-center">
                     <IconBtn onClick={() => handleEditStart(idx, item)}>
-                      Edit
+                      <EditIcon className="w-[1.5em] h-[1.5em]" />
                     </IconBtn>
                     <RemoveBtn onClick={() => handleRemove(item)} />
                   </div>

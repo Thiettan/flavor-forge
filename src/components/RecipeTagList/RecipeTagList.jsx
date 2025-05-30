@@ -17,7 +17,7 @@ export const RecipeTagList = ({ tag, editMode, setTag }) => {
             <RemoveBtn
               variant="secondary"
               onClick={() => handleRemove(item)}
-              className="-top-1 -right-1"
+              className=""
             />
           )}
         </li>

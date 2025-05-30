@@ -99,9 +99,9 @@ const RecipeForger = () => {
   return (
     <>
       <div className="recipe-forger">
-        <h1 className="text-6xl text-center">Flavor Forge</h1>
-        <div className="@container max-w-5xl mx-auto">
-          <form action="" id="RecipeForger" className="max-w-full mx-auto p-4">
+        <div className="@container max-w-5xl mx-auto p-4">
+          <h2 className="text-5xl mb-4">Recipe Forge</h2>
+          <form action="" id="RecipeForger" className="max-w-full mx-auto ">
             <h2 className="text-xl mb-5">Form Heading 2</h2>
 
             <RecipeNameInput name={name} handleAddName={handleAddName} />

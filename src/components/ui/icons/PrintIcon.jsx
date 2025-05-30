@@ -3,13 +3,13 @@ export default function PrintIcon({ className }) {
     <svg
       className={className}
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       fill="currentColor"
       version="1.1"
       height="800px"
       viewBox="796 675.578 200 200"
-      enable-background="new 796 675.578 200 200"
-      xml:space="preserve"
+      enableBackground="new 796 675.578 200 200"
+      xmlSpace="preserve"
     >
       <g>
         <path d="M980.674,732.687h-10.723v-34.028c0-5.296-4.309-9.604-9.604-9.604H831.654c-5.295,0-9.604,4.309-9.604,9.604v34.028   h-10.723c-8.465,0-15.327,6.861-15.327,15.326v55.128c0,8.465,6.862,15.327,15.327,15.327h10.723v34.028   c0,5.296,4.309,9.604,9.604,9.604h128.694c5.295,0,9.604-4.309,9.604-9.604v-34.028h10.723c8.465,0,15.326-6.862,15.326-15.327   v-55.128C996,739.548,989.139,732.687,980.674,732.687z M834.097,701.102h123.807v31.585H834.097V701.102z M834.097,850.053   v-72.212h123.807v72.212H834.097z" />

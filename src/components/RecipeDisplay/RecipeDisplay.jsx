@@ -16,7 +16,7 @@ const RecipeDisplay = ({ ...props }) => {
 
   return (
     <div className="RecipeDisplay">
-      <div className="container mx-auto">
+      <div className="container mx-auto p-4">
         <h2 className="text-6xl">{Recipe.name}</h2>
         <div className="flex justify-between items-center">
           <div className="flex justify-between items-center gap-4">

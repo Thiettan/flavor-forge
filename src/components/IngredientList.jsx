@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import RemoveBtn from "./ui/RemoveBtn";
 import Checkbox from "./ui/Checkbox";
 import IconBtn from "./ui/IconBtn";
+import EditIcon from "./ui/icons/EditIcon";
 
 export const IngredientList = React.memo(
   ({ ingredients, editMode, setIngredients, className, showCheckbox }) => {
@@ -104,7 +105,7 @@ export const IngredientList = React.memo(
                   {editMode && (
                     <div className="flex gap-2 items-center justify-center">
                       <IconBtn onClick={() => handleEditStart(idx, item)}>
-                        Edit
+                        <EditIcon className="w-[1.5em] h-[1.5em]" />
                       </IconBtn>
                       <RemoveBtn onClick={() => handleRemove(item)} />
                     </div>
