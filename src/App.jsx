@@ -13,7 +13,7 @@ function App() {
     <>
       <h1 className="text-center">Flavor Forge</h1>
       <RecipeCarousel recipeBook={recipeBook} />
-      {/*  <RecipeForger /> */}
+      <RecipeForger />
       {recipeBook && (
         <RecipeDisplay props={recipeBook[recipeBook.length - 1]} />
       )}

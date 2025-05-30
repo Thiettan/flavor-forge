@@ -7,6 +7,7 @@ import ToggleBtn from "../ui/ToggleBtn";
 import { useState } from "react";
 import PrintIcon from "../ui/icons/PrintIcon";
 import RecipeDate from "../RecipeDate";
+import { EditableList } from "../EditableList";
 
 const RecipeDisplay = ({ ...props }) => {
   const Recipe = props.props;
@@ -56,19 +57,31 @@ const RecipeDisplay = ({ ...props }) => {
         <section className="my-4">
           <h3 className="text-2xl mb-2">Ingredients</h3>
           <hr />
-          <IngredientList
+          {/*           <IngredientList
             ingredients={Recipe.ingredients}
             showCheckbox={showCheckbox}
             className="py-2 px-2"
+          /> */}
+          <EditableList
+            items={Recipe.ingredients}
+            setItems={null}
+            editMode={false}
+            className="py-2 px-2"
+            showCheckbox={showCheckbox}
+            isOrdered={false}
           />
         </section>
         <section className="my-4">
           <h3 className="text-2xl mb-2">Directions</h3>
           <hr />
-          <DirectionsList
-            directions={Recipe.directions}
-            showCheckbox={showCheckbox}
+          <EditableList
+            items={Recipe.directions}
+            setItems={null}
+            editMode={false}
             className="py-2 px-2"
+            showCheckbox={showCheckbox}
+            isOrdered={true}
+            getItemPrefix={(idx) => `${idx + 1}.`}
           />
         </section>
       </div>

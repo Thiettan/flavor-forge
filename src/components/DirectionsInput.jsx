@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddBtn from "./ui/AddBtn";
 import { DirectionsList } from "./DirectionsList";
+import { EditableList } from "./EditableList";
 
 const DirectionsInput = ({
   directions,
@@ -37,10 +38,20 @@ const DirectionsInput = ({
         +
       </AddBtn>
 
-      <DirectionsList
+      {/*       <DirectionsList
         directions={directions}
         setDirections={setDirections}
         editMode={true}
+      /> */}
+
+      <EditableList
+        items={directions}
+        setItems={setDirections}
+        editMode={true}
+        className=""
+        showCheckbox={false}
+        isOrdered={true}
+        getItemPrefix={(idx) => `${idx + 1}.`}
       />
     </div>
   );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddBtn from "./ui/AddBtn";
 import Input from "./ui/Input";
 import { IngredientList } from "./IngredientList";
+import { EditableList } from "./EditableList";
 
 const IngredientInput = ({
   ingredients,
@@ -45,10 +46,19 @@ const IngredientInput = ({
           +
         </AddBtn>
       </div>
-      <IngredientList
+      {/*       <IngredientList
         ingredients={ingredients}
         setIngredients={setIngredients}
         editMode={true}
+      /> */}
+
+      <EditableList
+        items={ingredients}
+        setItems={setIngredients}
+        editMode={true}
+        className="your-custom-class"
+        showCheckbox={false}
+        isOrdered={false}
       />
     </div>
   );

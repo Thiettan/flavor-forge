@@ -12,6 +12,16 @@ export const IngredientList = React.memo(
     // Store the value of the item being edited
     const [editingValue, setEditingValue] = useState("");
 
+    //Track which ingredients are checked
+    const [checkedItems, setCheckedItems] = useState({});
+
+    const toggleChecked = (index) => {
+      setCheckedItems((prev) => ({
+        ...prev,
+        [index]: !prev[index],
+      }));
+    };
+
     // Ref to the input field for auto-focus
     const inputRef = useRef(null);
 
@@ -95,11 +105,20 @@ export const IngredientList = React.memo(
                   {/* Normal display mode */}
                   <div className="w-full flex items-center gap-2">
                     {showCheckbox ? (
-                      <Checkbox />
+                      <Checkbox
+                        checked={checkedItems[idx] || false}
+                        onChange={() => toggleChecked(idx)}
+                      />
                     ) : (
                       <span className="text-gray-500 pt-[2px]">•</span>
                     )}
-                    <span>{item}</span>
+                    <span
+                      className={`strike-animate transition-colors duration-300 ${
+                        checkedItems[idx] ? "line-through text-gray-400" : ""
+                      }`}
+                    >
+                      {item}
+                    </span>
                   </div>
                   {/* Edit and Remove buttons (only in editMode) */}
                   {editMode && (

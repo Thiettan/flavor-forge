@@ -1,5 +1,31 @@
 @import "tailwindcss";
 
+@tailwind utilities;
+
+@layer utilities {
+  .strike-animate {
+    position: relative;
+    display: inline-block;
+  }
+
+  .strike-animate::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 2px;
+    width: 0;
+    background-color: currentColor;
+    transform: translateY(-50%);
+    transition: width 0.3s ease;
+    pointer-events: none;
+  }
+
+  .struck::after {
+    width: 100%;
+  }
+}
+
 @theme {
   --color-slate: #123340;
   --color-lemon: #F2BC1B;
@@ -24,6 +50,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 form input {
 /*   border: 1px solid grey;
