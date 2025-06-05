@@ -9,6 +9,7 @@ import DirectionsInput from "../DirectionsInput";
 
 // 🔧 Helper Functions ====
 import { trimArray } from "../../util/helper-functions";
+import { saveSingleRecipe } from "../../components/FireBase/firestoreHelpers";
 // ========================
 
 // Test Data ==============
@@ -29,8 +30,7 @@ const RecipeForger = ({ recipeBook, setRecipeBook, saveUserRecipes, user }) => {
     console.log("Ingredients state updated:", ingredients);
   }, [ingredients]);
 
-  const handleSaveRecipe = () => {
-    //insert form validation here
+  const handleSaveRecipe = async () => {
     const formValid = true;
     if (!formValid) {
       alert("Please fill out all required fields.");
@@ -48,12 +48,18 @@ const RecipeForger = ({ recipeBook, setRecipeBook, saveUserRecipes, user }) => {
       createdAt: new Date().toISOString(),
     };
 
-    console.log(compiledRecipe);
+    console.log("[handleSaveRecipe] Compiled recipe:", compiledRecipe);
 
-    const newRecipeBook = recipeBook;
-    newRecipeBook.push(compiledRecipe);
-    setRecipeBook(newRecipeBook);
-    saveUserRecipes(user.uid, newRecipeBook);
+    // ✅ Update local state
+    const updatedBook = [...recipeBook, compiledRecipe];
+    setRecipeBook(updatedBook);
+
+    // ✅ Save just this one recipe to Firestore
+    try {
+      await saveSingleRecipe(user.uid, compiledRecipe);
+    } catch (error) {
+      console.error("Error saving recipe:", error);
+    }
 
     /** Old logic for Local Storage below */
     /*     const storedBookString = localStorage.getItem("recipeBook"); //get stored book from user
