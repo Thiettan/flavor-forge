@@ -64,14 +64,14 @@ function App() {
 
   return (
     <>
-      {user ? (
+      {user ? ( //checks if user is signed in
         <>
           <SignOutBtn handleSignOut={handleSignOut} />
           <MainMenu currentPage={currentPage} setCurrentPage={setCurrentPage} />
           {AppList[currentPage]}
         </>
       ) : (
-        <SignIn />
+        <SignIn /> //no user detected, sign in page
       )}
     </>
   );

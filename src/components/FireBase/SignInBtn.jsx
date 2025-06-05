@@ -18,7 +18,7 @@ export default function SignInBtn() {
       <button
         onClick={handleSignIn}
         type="button"
-        class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2"
+        class="w-100 text-white bg-[#c34117] hover:bg-[#c34117]/90 focus:ring-4 focus:outline-none focus:ring-[#c34117]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-[#c34117]/55 me-2 mb-2"
       >
         <svg
           class="w-4 h-4 me-2"
