@@ -57,7 +57,6 @@ function App() {
     <RecipeForger
       recipeBook={recipeBook}
       setRecipeBook={setRecipeBook}
-      saveUserRecipes={saveUserRecipes}
       user={user}
     />,
   ];

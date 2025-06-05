@@ -8,7 +8,7 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
     if (!file) return; // failsafe in case if user cancels
 
     // Check file size
-    if (file.size > 1024 * 1024) {
+    if (file.size > 200 * 1024) {
       alert("File is too large. Please select an image under 1MB.");
       return;
     }
@@ -81,7 +81,7 @@ const RecipeImgInput = ({ image, handleAddImage }) => {
                 and drop
               </p>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                PNG or JPG (MAX. 1MB)
+                PNG or JPG (MAX. 200KB)
               </p>
             </div>
             <input

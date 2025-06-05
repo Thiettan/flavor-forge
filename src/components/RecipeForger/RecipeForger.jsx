@@ -18,7 +18,7 @@ import testIngredientData from "../../data/recipe-ingredients-test.json";
 import testDirectionData from "../../data/recipe-directions-test.json";
 // ========================
 
-const RecipeForger = ({ recipeBook, setRecipeBook, saveUserRecipes, user }) => {
+const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
   const [name, setName] = useState("French Omelette");
   const [tag, setTag] = useState(testTagData);
   const [description, setDescription] = useState("");
