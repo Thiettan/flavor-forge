@@ -17,7 +17,7 @@ import testIngredientData from "../../data/recipe-ingredients-test.json";
 import testDirectionData from "../../data/recipe-directions-test.json";
 // ========================
 
-const RecipeForger = () => {
+const RecipeForger = ({ recipeBook, setRecipeBook, saveUserRecipes, user }) => {
   const [name, setName] = useState("French Omelette");
   const [tag, setTag] = useState(testTagData);
   const [description, setDescription] = useState("");
@@ -50,7 +50,13 @@ const RecipeForger = () => {
 
     console.log(compiledRecipe);
 
-    const storedBookString = localStorage.getItem("recipeBook");
+    const newRecipeBook = recipeBook;
+    newRecipeBook.push(compiledRecipe);
+    setRecipeBook(newRecipeBook);
+    saveUserRecipes(user.uid, newRecipeBook);
+
+    /** Old logic for Local Storage below */
+    /*     const storedBookString = localStorage.getItem("recipeBook"); //get stored book from user
 
     if (storedBookString) {
       const storedBook = JSON.parse(storedBookString);
@@ -60,7 +66,7 @@ const RecipeForger = () => {
     } else {
       const recipeBook = [compiledRecipe];
       localStorage.setItem("recipeBook", JSON.stringify(recipeBook));
-    }
+    } */
   };
 
   function handleAddName(e, newName) {
@@ -95,48 +101,52 @@ const RecipeForger = () => {
 
   return (
     <>
-      <div className="recipe-forger">
-        <div className="@container max-w-5xl mx-auto p-4">
-          <h2 className="text-5xl mb-4">Recipe Forge</h2>
-          <form action="" id="RecipeForger" className="max-w-full mx-auto ">
-            <h2 className="text-xl mb-5">Form Heading 2</h2>
+      {user ? (
+        <div className="recipe-forger">
+          <div className="@container max-w-5xl mx-auto p-4">
+            <h2 className="text-5xl mb-4">Recipe Forge</h2>
+            <form action="" id="RecipeForger" className="max-w-full mx-auto ">
+              <h2 className="text-xl mb-5">Form Heading 2</h2>
 
-            <RecipeNameInput name={name} handleAddName={handleAddName} />
+              <RecipeNameInput name={name} handleAddName={handleAddName} />
 
-            <RecipeTagInput
-              tag={tag}
-              handleAddTag={handleAddTag}
-              setTag={setTag}
-            />
+              <RecipeTagInput
+                tag={tag}
+                handleAddTag={handleAddTag}
+                setTag={setTag}
+              />
 
-            <RecipeDescriptionInput
-              description={description}
-              handleAddDescription={handleAddDescription}
-            />
+              <RecipeDescriptionInput
+                description={description}
+                handleAddDescription={handleAddDescription}
+              />
 
-            <RecipeImgInput image={image} handleAddImage={handleAddImage} />
+              <RecipeImgInput image={image} handleAddImage={handleAddImage} />
 
-            <IngredientInput
-              ingredients={ingredients}
-              handleAddIngredient={handleAddIngredient}
-              setIngredients={setIngredients}
-            />
-            <DirectionsInput
-              directions={directions}
-              handleAddDirections={handleAddDirections}
-              setDirections={setDirections}
-            />
+              <IngredientInput
+                ingredients={ingredients}
+                handleAddIngredient={handleAddIngredient}
+                setIngredients={setIngredients}
+              />
+              <DirectionsInput
+                directions={directions}
+                handleAddDirections={handleAddDirections}
+                setDirections={setDirections}
+              />
 
-            <AddBtn
-              variant="save"
-              className="float-right"
-              onClick={handleSaveRecipe}
-            >
-              Forge Recipe
-            </AddBtn>
-          </form>
+              <AddBtn
+                variant="save"
+                className="float-right"
+                onClick={handleSaveRecipe}
+              >
+                Forge Recipe
+              </AddBtn>
+            </form>
+          </div>
         </div>
-      </div>
+      ) : (
+        <p>Loading user...</p>
+      )}
     </>
   );
 };

@@ -4,9 +4,9 @@ import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
 
 import { getLocalStorage } from "../../util/helper-functions";
 
-export default function RecipeCarousel() {
+export default function RecipeCarousel({ recipeBook }) {
   const [activeRecipe, setActiveRecipe] = useState(null);
-  const [recipeBook, setRecipeBook] = useState(getLocalStorage("recipeBook"));
+  /*   const [recipeBook, setRecipeBook] = useState(getLocalStorage("recipeBook")); */
   const scrollRef = useRef(null);
   const isDown = useRef(false);
   const startX = useRef(0);
@@ -36,27 +36,34 @@ export default function RecipeCarousel() {
 
   return (
     <>
-      <div
-        ref={scrollRef}
-        className="RecipeCarousel p-4 overflow-x-auto cursor-grab"
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="flex gap-4 w-max">
-          {recipeBook.map((item, i) => (
-            <RecipeCard
-              key={i}
-              recipe={item}
-              i={i}
-              setActiveRecipe={setActiveRecipe}
-            />
-          ))}
-        </div>
-      </div>
-      {activeRecipe !== null && (
-        <RecipeDisplay props={recipeBook[activeRecipe]} />
+      {recipeBook ? (
+        <>
+          <div
+            ref={scrollRef}
+            className="RecipeCarousel p-4 overflow-x-auto cursor-grab"
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+          >
+            <div className="flex gap-4 w-max">
+              {recipeBook.map((item, i) => (
+                <RecipeCard
+                  key={i}
+                  recipe={item}
+                  i={i}
+                  setActiveRecipe={setActiveRecipe}
+                />
+              ))}
+            </div>
+          </div>
+
+          {activeRecipe !== null && (
+            <RecipeDisplay props={recipeBook[activeRecipe]} />
+          )}
+        </>
+      ) : (
+        <p>Your recipe book is empty</p>
       )}
     </>
   );

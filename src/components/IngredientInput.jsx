@@ -10,7 +10,7 @@ const IngredientInput = ({
   setIngredients,
 }) => {
   const [inputValue, setInputValue] = useState("");
-  console.log(ingredients);
+  //console.log(ingredients);
   return (
     <div className="mb-5">
       <h3 className="text-2xl mb-3">Ingredients</h3>
