@@ -18,6 +18,8 @@ import testIngredientData from "../../data/recipe-ingredients-test.json";
 import testDirectionData from "../../data/recipe-directions-test.json";
 // ========================
 
+import PopupTimed from "../ui/PopupTimed";
+
 const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
   const [name, setName] = useState("French Omelette");
   const [tag, setTag] = useState(testTagData);
@@ -25,6 +27,7 @@ const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
   const [image, setImage] = useState(null);
   const [ingredients, setIngredients] = useState(testIngredientData);
   const [directions, setDirections] = useState(testDirectionData);
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     console.log("Ingredients state updated:", ingredients);
@@ -57,6 +60,7 @@ const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
     // ✅ Save just this one recipe to Firestore
     try {
       await saveSingleRecipe(user.uid, compiledRecipe);
+      setShowPopup(true);
     } catch (error) {
       console.error("Error saving recipe:", error);
     }
@@ -149,6 +153,11 @@ const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
               </AddBtn>
             </form>
           </div>
+          <PopupTimed
+            message="Recipe saved successfully!"
+            isVisible={showPopup}
+            onClose={() => setShowPopup(false)}
+          />
         </div>
       ) : (
         <p>Loading user...</p>

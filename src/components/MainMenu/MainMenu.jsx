@@ -1,5 +1,5 @@
 export default function MainMenu({ currentPage, setCurrentPage }) {
-  const menuOptions = ["Recipe Carousel", "Recipe Forge"];
+  const menuOptions = ["Recipe Carousel", "Recipe Forge", "Recipe Book"];
   const isActiveCSS = "bg-amber-700";
   const isInactiveCSS = "bg-gray-700";
 

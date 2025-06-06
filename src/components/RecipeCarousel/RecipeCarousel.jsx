@@ -2,8 +2,6 @@ import { useRef, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
 
-import { getLocalStorage } from "../../util/helper-functions";
-
 export default function RecipeCarousel({ recipeBook }) {
   const [activeRecipe, setActiveRecipe] = useState(null);
   /*   const [recipeBook, setRecipeBook] = useState(getLocalStorage("recipeBook")); */
