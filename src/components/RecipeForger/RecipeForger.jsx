@@ -31,7 +31,6 @@ const RecipeForger = ({
   setTempData,
 }) => {
   /*   const isDev = process.env.NODE_ENV === "development"; */
-  const isDev = true;
   const [name, setName] = useState(
     tempData == null ? "French Omelette" : recipeBook[tempData].name
   );

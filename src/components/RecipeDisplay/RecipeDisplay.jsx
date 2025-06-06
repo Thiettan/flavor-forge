@@ -35,6 +35,7 @@ const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
           <div className="flex justify-between items-center gap-4">
             <IconBtn
               className="primary"
+              tooltip="Print"
               variant="utility"
               onClick={() => {
                 window.print();
@@ -43,7 +44,10 @@ const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
               <PrintIcon className="h-[1.5em] w-[1.5em] flex items-center justify-center" />
             </IconBtn>
 
-            <IconBtn onClick={() => handleEditMode()}>
+            <IconBtn
+              onClick={() => handleEditMode()}
+              tooltip="Edit your recipe"
+            >
               <EditIcon className="w-[1.5em] h-[1.5em]" />
             </IconBtn>
             <ToggleBtn

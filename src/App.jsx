@@ -6,16 +6,13 @@ import MainMenu from "./components/MainMenu/MainMenu";
 import RecipeCarousel from "./components/RecipeCarousel/RecipeCarousel";
 import RecipeBook from "./components/RecipeBook/RecipeBook";
 
-import SignInBtn from "./components/FireBase/SignInBtn";
-import SignOutBtn from "./components/FireBase/SignOutBtn";
-
 import { auth } from "./components/FireBase/firebase";
 import {
   getUserRecipes,
   saveUserRecipes,
 } from "./components/FireBase/firestoreHelpers";
 import SignIn from "./components/FireBase/SignIn";
-import SignOut from "./components/FireBase/SignOutBtn";
+import SignOutBtn from "./components/FireBase/SignOutBtn";
 
 import ConfirmPopup from "./components/ui/ConfirmPopup";
 
@@ -27,7 +24,7 @@ function App() {
   const [showPopup, setShowPopup] = useState(false);
 
   const [tempData, setTempData] = useState(null);
-  const [currentMode, setCurrentMode] = useState(null);
+  //const [currentMode, setCurrentMode] = useState(null);
 
   function handleSetCurrentPage(idx, data) {
     setCurrentPage(idx);

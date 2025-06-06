@@ -3,6 +3,7 @@ export default function IconBtn({
   type = "button",
   variant = "primary",
   className = "", //destructuring syntax a default string to avoid undefined
+  tooltip = "",
   ...props //Captures any extra props for flexibility
 }) {
   const baseStyles =
@@ -19,12 +20,20 @@ export default function IconBtn({
   };
 
   return (
-    <button
-      type={type}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
+    <div className="relative group inline-block">
+      <button
+        type={type}
+        className={`${baseStyles} ${variants[variant]} ${className}`}
+        {...props}
+      >
+        {children}
+      </button>
+
+      {tooltip && (
+        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block w-max text-xs bg-gray-800 text-white px-2 py-1 rounded z-10 whitespace-nowrap">
+          {tooltip}
+        </span>
+      )}
+    </div>
   );
 }
