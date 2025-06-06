@@ -6,13 +6,20 @@ import ToggleBtn from "../ui/ToggleBtn";
 import PrintIcon from "../ui/icons/PrintIcon";
 import RecipeDate from "../RecipeDate";
 import { EditableList } from "../EditableList";
+import EditIcon from "../ui/icons/EditIcon";
 
-const RecipeDisplay = ({ ...props }) => {
+const RecipeDisplay = ({ setCurrentPage, ...props }) => {
   const Recipe = props.props;
-  console.log(Recipe);
+  //console.log(Recipe);
 
   const [showCheckbox, toggleShowCheckbox] = useState(false);
-  const [editMode, toggleEditMode] = useState(false);
+  /*   const [editMode, toggleEditMode] = useState(false); */
+  /*   const [ingredients, setIngredients] = useState(Recipe.ingredients);
+  const [directions, setDirections] = useState(Recipe.directions); */
+
+  function handleEditMode() {
+    setCurrentPage(1); //navigates to RecipeForger to edit current recipe
+  }
 
   return (
     <div className="RecipeDisplay">
@@ -33,23 +40,18 @@ const RecipeDisplay = ({ ...props }) => {
             >
               <PrintIcon className="h-[1.5em] w-[1.5em] flex items-center justify-center" />
             </IconBtn>
+
+            <IconBtn onClick={() => handleEditMode()}>
+              <EditIcon className="w-[1.5em] h-[1.5em]" />
+            </IconBtn>
             <ToggleBtn
               onChange={(e) => {
                 toggleShowCheckbox(e.target.checked);
               }}
               checked={showCheckbox}
-              disabled={editMode}
+              disabled={false}
             >
               Checklist
-            </ToggleBtn>
-            <ToggleBtn
-              onChange={(e) => {
-                toggleEditMode(e.target.checked);
-              }}
-              checked={editMode}
-              disabled={showCheckbox}
-            >
-              Edit Mode
             </ToggleBtn>
           </div>
         </div>

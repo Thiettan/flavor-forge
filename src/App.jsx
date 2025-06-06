@@ -63,7 +63,11 @@ function App() {
   }, [recipeBook, user, hasLoadedRecipes]); // ✅ include the flag
 
   const AppList = [
-    <RecipeCarousel recipeBook={recipeBook} setRecipeBook={setRecipeBook} />,
+    <RecipeCarousel
+      recipeBook={recipeBook}
+      setRecipeBook={setRecipeBook}
+      setCurrentPage={setCurrentPage}
+    />,
     <RecipeForger
       recipeBook={recipeBook}
       setRecipeBook={setRecipeBook}
@@ -76,7 +80,6 @@ function App() {
     <>
       {user ? ( //checks if user is signed in
         <>
-          <SignOutBtn handleSignOut={handleSignOut} />
           <MainMenu currentPage={currentPage} setCurrentPage={setCurrentPage} />
           {AppList[currentPage]}
           <button
@@ -93,6 +96,7 @@ function App() {
             onConfirm={handleConfirm}
             onClose={() => setShowPopup(false)}
           />
+          <SignOutBtn handleSignOut={handleSignOut} />
         </>
       ) : (
         <SignIn /> //no user detected, sign in page

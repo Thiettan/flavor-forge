@@ -1,6 +1,7 @@
 import {
   doc,
   getDoc,
+  updateDoc,
   setDoc,
   getDocs,
   collection
@@ -28,11 +29,17 @@ export async function getUserRecipes(uid) {
     return [];
   }
 }
+//Merges or updates only specified fields
+export async function updateRecipe(uid, recipeId, data) {
+  const recipeRef = doc(db, "users", uid, "recipes", recipeId);
+  await updateDoc(recipeRef, data);
+  console.log(`[updateRecipe] Updated fields in recipe ${recipeId}`);
+}
 
 // 💾 Save one recipe document to the user's `recipes` subcollection
 export async function saveSingleRecipe(uid, recipe) {
   const recipeRef = doc(db, "users", uid, "recipes", recipe.id);
-  await setDoc(recipeRef, recipe);
+  await setDoc(recipeRef, recipe); //setDoc replaces/uploads entire document
   console.log(`[saveSingleRecipe] Saved recipe: ${recipe.name}`);
 }
 

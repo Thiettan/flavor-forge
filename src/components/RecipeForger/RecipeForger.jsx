@@ -21,12 +21,16 @@ import testDirectionData from "../../data/recipe-directions-test.json";
 import PopupTimed from "../ui/PopupTimed";
 
 const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
-  const [name, setName] = useState("French Omelette");
-  const [tag, setTag] = useState(testTagData);
+  /*   const isDev = process.env.NODE_ENV === "development"; */
+  const isDev = true;
+  const [name, setName] = useState(isDev ? "French Omelette" : "");
+  const [tag, setTag] = useState(isDev ? testTagData : []);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
-  const [ingredients, setIngredients] = useState(testIngredientData);
-  const [directions, setDirections] = useState(testDirectionData);
+  const [ingredients, setIngredients] = useState(
+    isDev ? testIngredientData : []
+  );
+  const [directions, setDirections] = useState(isDev ? testDirectionData : []);
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
