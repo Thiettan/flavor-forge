@@ -26,6 +26,14 @@ function App() {
   const [hasLoadedRecipes, setHasLoadedRecipes] = useState(false); // ✅ FLAG
   const [showPopup, setShowPopup] = useState(false);
 
+  const [tempData, setTempData] = useState(null);
+  const [currentMode, setCurrentMode] = useState(null);
+
+  function handleSetCurrentPage(idx, data) {
+    setCurrentPage(idx);
+    if (data != null) setTempData(data);
+  }
+
   const handleConfirm = () => {
     console.log("User confirmed.");
     setShowPopup(false);
@@ -66,12 +74,14 @@ function App() {
     <RecipeCarousel
       recipeBook={recipeBook}
       setRecipeBook={setRecipeBook}
-      setCurrentPage={setCurrentPage}
+      handleSetCurrentPage={handleSetCurrentPage}
     />,
     <RecipeForger
       recipeBook={recipeBook}
       setRecipeBook={setRecipeBook}
       user={user}
+      tempData={tempData}
+      setTempData={setTempData}
     />,
     <RecipeBook recipeBook={recipeBook} />,
   ];
@@ -80,7 +90,10 @@ function App() {
     <>
       {user ? ( //checks if user is signed in
         <>
-          <MainMenu currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <MainMenu
+            currentPage={currentPage}
+            handleSetCurrentPage={handleSetCurrentPage}
+          />
           {AppList[currentPage]}
           <button
             onClick={() => setShowPopup(true)}

@@ -1,4 +1,4 @@
-export default function MainMenu({ currentPage, setCurrentPage }) {
+export default function MainMenu({ currentPage, handleSetCurrentPage }) {
   const menuOptions = ["Recipe Carousel", "Recipe Forge", "Recipe Book"];
   const isActiveCSS = "bg-amber-700";
   const isInactiveCSS = "bg-gray-700";
@@ -9,7 +9,7 @@ export default function MainMenu({ currentPage, setCurrentPage }) {
         {menuOptions.map((item, i) => (
           <div
             onClick={() => {
-              setCurrentPage(i);
+              handleSetCurrentPage(i);
             }}
             key={`menu-item-${i}`}
             className={`relative w-64 h-32 rounded-lg overflow-hidden group cursor-pointer ${

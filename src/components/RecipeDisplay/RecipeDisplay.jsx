@@ -8,9 +8,9 @@ import RecipeDate from "../RecipeDate";
 import { EditableList } from "../EditableList";
 import EditIcon from "../ui/icons/EditIcon";
 
-const RecipeDisplay = ({ setCurrentPage, ...props }) => {
+const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
   const Recipe = props.props;
-  //console.log(Recipe);
+  console.log(Recipe);
 
   const [showCheckbox, toggleShowCheckbox] = useState(false);
   /*   const [editMode, toggleEditMode] = useState(false); */
@@ -18,7 +18,9 @@ const RecipeDisplay = ({ setCurrentPage, ...props }) => {
   const [directions, setDirections] = useState(Recipe.directions); */
 
   function handleEditMode() {
-    setCurrentPage(1); //navigates to RecipeForger to edit current recipe
+    //insert recipe id below or maybe index
+
+    handleSetCurrentPage(1, recipeIndex); //navigates to RecipeForger to edit current recipe
   }
 
   return (

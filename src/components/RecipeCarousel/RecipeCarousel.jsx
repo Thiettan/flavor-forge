@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
 
-export default function RecipeCarousel({ recipeBook, setCurrentPage }) {
+export default function RecipeCarousel({ recipeBook, handleSetCurrentPage }) {
   const [activeRecipe, setActiveRecipe] = useState(null);
   /*   const [recipeBook, setRecipeBook] = useState(getLocalStorage("recipeBook")); */
   const scrollRef = useRef(null);
@@ -59,7 +59,8 @@ export default function RecipeCarousel({ recipeBook, setCurrentPage }) {
           {activeRecipe !== null && (
             <RecipeDisplay
               props={recipeBook[activeRecipe]}
-              setCurrentPage={setCurrentPage}
+              handleSetCurrentPage={handleSetCurrentPage}
+              recipeIndex={activeRecipe}
             />
           )}
         </>

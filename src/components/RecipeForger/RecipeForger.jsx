@@ -9,7 +9,10 @@ import DirectionsInput from "../DirectionsInput";
 
 // 🔧 Helper Functions ====
 import { trimArray } from "../../util/helper-functions";
-import { saveSingleRecipe } from "../../components/FireBase/firestoreHelpers";
+import {
+  saveSingleRecipe,
+  updateRecipe,
+} from "../../components/FireBase/firestoreHelpers";
 // ========================
 
 // Test Data ==============
@@ -20,17 +23,33 @@ import testDirectionData from "../../data/recipe-directions-test.json";
 
 import PopupTimed from "../ui/PopupTimed";
 
-const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
+const RecipeForger = ({
+  recipeBook,
+  setRecipeBook,
+  user,
+  tempData,
+  setTempData,
+}) => {
   /*   const isDev = process.env.NODE_ENV === "development"; */
   const isDev = true;
-  const [name, setName] = useState(isDev ? "French Omelette" : "");
-  const [tag, setTag] = useState(isDev ? testTagData : []);
-  const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
-  const [ingredients, setIngredients] = useState(
-    isDev ? testIngredientData : []
+  const [name, setName] = useState(
+    tempData == null ? "French Omelette" : recipeBook[tempData].name
   );
-  const [directions, setDirections] = useState(isDev ? testDirectionData : []);
+  const [tag, setTag] = useState(
+    tempData == null ? testTagData : recipeBook[tempData].tag
+  );
+  const [description, setDescription] = useState(
+    tempData == null ? "" : recipeBook[tempData].description
+  );
+  const [image, setImage] = useState(
+    tempData == null ? null : recipeBook[tempData].image
+  );
+  const [ingredients, setIngredients] = useState(
+    tempData == null ? testIngredientData : recipeBook[tempData].ingredients
+  );
+  const [directions, setDirections] = useState(
+    tempData == null ? testDirectionData : recipeBook[tempData].directions
+  );
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
@@ -45,7 +64,7 @@ const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
     }
 
     const compiledRecipe = {
-      id: crypto.randomUUID(), //generate unique id
+      id: tempData == null ? crypto.randomUUID() : recipeBook[tempData].id, //generate unique id
       name: name.trim(),
       tag: trimArray(tag), // trimmed array of tag strings
       description: description,
@@ -58,12 +77,23 @@ const RecipeForger = ({ recipeBook, setRecipeBook, user }) => {
     console.log("[handleSaveRecipe] Compiled recipe:", compiledRecipe);
 
     // ✅ Update local state
-    const updatedBook = [...recipeBook, compiledRecipe];
+    const isNewRecipe = tempData == null;
+
+    // ✅ Update local state
+    const updatedBook = isNewRecipe
+      ? [...recipeBook, compiledRecipe]
+      : recipeBook.map((r, index) => (index === tempData ? compiledRecipe : r));
+
     setRecipeBook(updatedBook);
 
-    // ✅ Save just this one recipe to Firestore
+    // ✅ Save to Firestore
     try {
-      await saveSingleRecipe(user.uid, compiledRecipe);
+      if (isNewRecipe) {
+        await saveSingleRecipe(user.uid, compiledRecipe);
+      } else {
+        await updateRecipe(user.uid, compiledRecipe.id, compiledRecipe);
+        setTempData(null);
+      }
       setShowPopup(true);
     } catch (error) {
       console.error("Error saving recipe:", error);
