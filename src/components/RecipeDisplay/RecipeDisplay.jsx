@@ -1,10 +1,8 @@
-import { DirectionsList } from "../DirectionsList";
-import { IngredientList } from "../IngredientList";
+import { useState } from "react";
 import { RecipeTagList } from "../RecipeTagList/RecipeTagList";
 import ActionBtn from "../ui/ActionBtn";
 import IconBtn from "../ui/IconBtn";
 import ToggleBtn from "../ui/ToggleBtn";
-import { useState } from "react";
 import PrintIcon from "../ui/icons/PrintIcon";
 import RecipeDate from "../RecipeDate";
 import { EditableList } from "../EditableList";
@@ -14,6 +12,7 @@ const RecipeDisplay = ({ ...props }) => {
   console.log(Recipe);
 
   const [showCheckbox, toggleShowCheckbox] = useState(false);
+  const [editMode, toggleEditMode] = useState(false);
 
   return (
     <div className="RecipeDisplay">
@@ -39,8 +38,18 @@ const RecipeDisplay = ({ ...props }) => {
                 toggleShowCheckbox(e.target.checked);
               }}
               checked={showCheckbox}
+              disabled={editMode}
             >
               Checklist
+            </ToggleBtn>
+            <ToggleBtn
+              onChange={(e) => {
+                toggleEditMode(e.target.checked);
+              }}
+              checked={editMode}
+              disabled={showCheckbox}
+            >
+              Edit Mode
             </ToggleBtn>
           </div>
         </div>
