@@ -26,7 +26,38 @@ function App() {
   const [recipeBook, setRecipeBook] = useState([]);
   const [user, setUser] = useState(null);
   const [hasLoadedRecipes, setHasLoadedRecipes] = useState(false); // ✅ FLAG
+
+  // Popup Management ///////////////////////////
   const [showPopup, setShowPopup] = useState(false);
+  const [confirmCallback, setConfirmCallback] = useState(null);
+  const [confirmArgs, setConfirmArgs] = useState(null);
+  const [popupData, setPopupData] = useState({
+    title: "",
+    message: "",
+    icon: "Success",
+  });
+  // 1. Call openConfirm to open popup and passes callback fn and arguments for it
+  function openConfirmPopup(callback, args = [], options = {}) {
+    setConfirmCallback(() => callback);
+    setConfirmArgs(args);
+
+    // Set default popup data, overridden by options
+    setPopupData({
+      title: options.title || "Are you sure?",
+      message: options.message || "This action cannot be undone.",
+      icon: options.icon || "Success",
+    });
+
+    setShowPopup(true);
+  }
+  // handleConfirm executing callback fn when CONFIRM button is clicked
+  function handleConfirm() {
+    if (confirmCallback) {
+      confirmCallback(...confirmArgs);
+    }
+    setShowPopup(false);
+  }
+  /////////////////////////////////////////////////
 
   const [tempData, setTempData] = useState(null);
   //const [currentMode, setCurrentMode] = useState(null);
@@ -35,12 +66,6 @@ function App() {
     setCurrentPage(idx);
     if (data != null) setTempData(data);
   }
-
-  const handleConfirm = () => {
-    console.log("User confirmed.");
-    setShowPopup(false);
-  };
-
   function handleSignOut() {
     setCurrentPage(0);
     setUser(null);
@@ -72,22 +97,25 @@ function App() {
     }
   }, [recipeBook, user, hasLoadedRecipes]); // ✅ include the flag
 
-  const AppList = [
-    <RecipeCarousel
-      recipeBook={recipeBook}
-      setRecipeBook={setRecipeBook}
-      handleSetCurrentPage={handleSetCurrentPage}
-    />,
-    <RecipeForger
-      recipeBook={recipeBook}
-      setRecipeBook={setRecipeBook}
-      user={user}
-      tempData={tempData}
-      setTempData={setTempData}
-    />,
-    <RecipeBook recipeBook={recipeBook} />,
-  ];
-
+  const AppList = user
+    ? [
+        <RecipeCarousel
+          recipeBook={recipeBook}
+          setRecipeBook={setRecipeBook}
+          handleSetCurrentPage={handleSetCurrentPage}
+          uid={user.uid}
+          openConfirmPopup={openConfirmPopup}
+        />,
+        <RecipeForger
+          recipeBook={recipeBook}
+          setRecipeBook={setRecipeBook}
+          user={user}
+          tempData={tempData}
+          setTempData={setTempData}
+        />,
+        <RecipeBook recipeBook={recipeBook} />,
+      ]
+    : [<p>Loading...</p>];
   return (
     <ThemeProvider theme={theme}>
       {user ? ( //checks if user is signed in
@@ -98,16 +126,18 @@ function App() {
           />
           {AppList[currentPage]}
           <button
-            onClick={() => setShowPopup(true)}
+            onClick={() => {
+              openConfirmPopup();
+            }}
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
             Trigger Popup
           </button>
           <ConfirmPopup
             isVisible={showPopup}
-            title="Recipe saved successfully!"
-            message="Would you like to reset the form?"
-            icon="Success"
+            title={popupData.title}
+            message={popupData.message}
+            icon={popupData.icon}
             onConfirm={handleConfirm}
             onClose={() => setShowPopup(false)}
           />

@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 import SuccessIcon from "../../assets/success-namazu.jpg";
+import WarningIcon from "../../assets/success-namazu.jpg";
+// Material UI ////////////////////////////
 import MUIButton from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+///////////////////////////////////////////
 
 export default function ConfirmPopup({
   isVisible,
@@ -13,6 +17,7 @@ export default function ConfirmPopup({
   const popupRef = useRef(null);
   const ICONS = {
     Success: SuccessIcon,
+    Warning: WarningIcon,
   };
 
   // Close when clicking outside the popup
@@ -38,7 +43,7 @@ export default function ConfirmPopup({
     <div className="fixed inset-0 bg-black/75 bg-opacity-50 flex items-center justify-center z-50">
       <div
         ref={popupRef}
-        className="bg-amber-900 p-6 rounded-lg shadow-xl max-w-sm w-full text-center"
+        className="bg-slate-800 p-6 rounded-lg shadow-xl max-w-sm w-full text-center"
       >
         <p className="text-2xl">{title}</p>
         <img
@@ -48,12 +53,12 @@ export default function ConfirmPopup({
         />
         <p className="text-md mb-4">{message}</p>
 
-        <button
-          onClick={onConfirm}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-        >
+        <MUIButton onClick={onClose} variant="text">
+          Cancel
+        </MUIButton>
+        <MUIButton onClick={onConfirm} className="" variant="contained">
           Confirm
-        </button>
+        </MUIButton>
       </div>
     </div>
   );

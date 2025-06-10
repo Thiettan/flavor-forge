@@ -1,6 +1,7 @@
 import {
   doc,
   getDoc,
+  deleteDoc,
   updateDoc,
   setDoc,
   getDocs,
@@ -55,4 +56,14 @@ export async function saveUserRecipes(uid, recipeBook) {
 
   await Promise.all(writePromises);
   console.log("[saveUserRecipes] All recipes saved successfully.");
+}
+
+export async function deleteRecipe(uid, recipeId) {
+  try {
+    const recipeRef = doc(db, "users", uid, "recipes", recipeId); //reference path to specific recipe that needs deleting
+    await deleteDoc(recipeRef);
+    console.log(`Recipe ${recipeId} deleted successfully.`);
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
+  }
 }

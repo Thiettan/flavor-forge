@@ -5,6 +5,7 @@ import IconBtn from "../ui/IconBtn";
 import ToggleBtn from "../ui/ToggleBtn";
 import RecipeDate from "../RecipeDate";
 import { EditableList } from "../EditableList";
+import { deleteRecipe } from "../FireBase/firestoreHelpers";
 /* import EditIcon from "../ui/icons/EditIcon"; */
 /* import PrintIcon from "../ui/icons/PrintIcon"; */
 
@@ -15,7 +16,13 @@ import PrintIcon from "@mui/icons-material/Print";
 import DeleteIcon from "@mui/icons-material/Delete";
 //////////////////////////////////////////////////
 
-const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
+const RecipeDisplay = ({
+  handleSetCurrentPage,
+  recipeIndex,
+  uid,
+  openConfirmPopup,
+  ...props
+}) => {
   const Recipe = props.props;
   console.log(Recipe);
 
@@ -60,7 +67,19 @@ const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
               {/*   <EditIcon className="w-[1.5em] h-[1.5em]" /> */}
             </IconBtn>
 
-            <IconBtn aria-label="delete" tooltip="Delete">
+            <IconBtn
+              aria-label="delete"
+              tooltip="Delete"
+              onClick={() => {
+                console.log(Recipe.id, uid);
+                openConfirmPopup(deleteRecipe, [uid, Recipe.id], {
+                  title: "Delete Recipe",
+                  message:
+                    "Are you sure you want to permanently delete this recipe?",
+                  icon: "Warning",
+                });
+              }}
+            >
               <DeleteIcon className="text-white" />
             </IconBtn>
 
