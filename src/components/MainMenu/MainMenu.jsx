@@ -1,4 +1,8 @@
-export default function MainMenu({ currentPage, handleSetCurrentPage }) {
+export default function MainMenu({
+  currentPage,
+  handleSetCurrentPage,
+  setTempData,
+}) {
   const menuOptions = ["Recipe Carousel", "Recipe Forge", "Recipe Book"];
   const isActiveCSS = "bg-amber-700";
   const isInactiveCSS = "bg-gray-700";
@@ -9,6 +13,7 @@ export default function MainMenu({ currentPage, handleSetCurrentPage }) {
         {menuOptions.map((item, i) => (
           <div
             onClick={() => {
+              setTempData(null);
               handleSetCurrentPage(i);
             }}
             key={`menu-item-${i}`}

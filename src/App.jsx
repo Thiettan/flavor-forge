@@ -74,10 +74,10 @@ function App() {
     setHasLoadedRecipes(false);
   }
 
-  const deleteAndUpdateRecipeBook = async (userId, recipeId) => {
-    console.log(user.uid, recipeId);
+  const deleteAndUpdateRecipeBook = async (recipeId, callback) => {
     await deleteRecipe(user.uid, recipeId);
     setRecipeBook((prev) => prev.filter((r) => r.id !== recipeId));
+    if (callback) callback(); // call the callback if provided
   };
 
   // Track auth state
@@ -110,7 +110,6 @@ function App() {
           recipeBook={recipeBook}
           setRecipeBook={setRecipeBook}
           handleSetCurrentPage={handleSetCurrentPage}
-          uid={user.uid}
           openConfirmPopup={openConfirmPopup}
           deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
         />,
@@ -131,6 +130,7 @@ function App() {
           <MainMenu
             currentPage={currentPage}
             handleSetCurrentPage={handleSetCurrentPage}
+            setTempData={setTempData}
           />
           {AppList[currentPage]}
           <button

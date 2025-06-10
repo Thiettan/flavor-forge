@@ -64,12 +64,12 @@ export default function RecipeCarousel({
 
           {activeRecipe !== null && (
             <RecipeDisplay
+              activeRecipe={activeRecipe}
               props={recipeBook[activeRecipe]}
               handleSetCurrentPage={handleSetCurrentPage}
-              recipeIndex={activeRecipe}
-              uid={uid}
               openConfirmPopup={openConfirmPopup}
               deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
+              setActiveRecipe={setActiveRecipe}
             />
           )}
         </>
