@@ -18,7 +18,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const RecipeDisplay = ({
   handleSetCurrentPage,
-  recipeIndex,
   uid,
   openConfirmPopup,
   ...props

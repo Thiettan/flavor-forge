@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AddBtn from "../ui/AddBtn";
 import RecipeNameInput from "../RecipeNameInput";
 import RecipeDescriptionInput from "../RecipeDescriptionInput";
@@ -8,7 +8,7 @@ import IngredientInput from "../IngredientInput";
 import DirectionsInput from "../DirectionsInput";
 
 // 🔧 Helper Functions ====
-import { trimArray } from "../../util/helper-functions";
+import { trimArray, upsertRecipe } from "../../util/helper-functions";
 import {
   saveSingleRecipe,
   updateRecipe,
@@ -81,11 +81,7 @@ const RecipeForger = ({
     const isNewRecipe = tempData == null;
 
     // ✅ Update local state, if newRecipe is true, append to RecipeBook state, else: replaces existing if matches recipe id
-    const updatedBook = isNewRecipe
-      ? [...recipeBook, compiledRecipe]
-      : recipeBook.map((r) =>
-          r.id === compiledRecipe.id ? compiledRecipe : r
-        );
+    const updatedBook = upsertRecipe(recipeBook, compiledRecipe);
     setRecipeBook(updatedBook);
 
     // ✅ Save to Firestore
@@ -101,19 +97,6 @@ const RecipeForger = ({
     } catch (error) {
       console.error("Error saving recipe:", error);
     }
-
-    /** Old logic for Local Storage below */
-    /*     const storedBookString = localStorage.getItem("recipeBook"); //get stored book from user
-
-    if (storedBookString) {
-      const storedBook = JSON.parse(storedBookString);
-      console.log(storedBook); // array of recipe objects
-      storedBook.push(compiledRecipe);
-      localStorage.setItem("recipeBook", JSON.stringify(storedBook));
-    } else {
-      const recipeBook = [compiledRecipe];
-      localStorage.setItem("recipeBook", JSON.stringify(recipeBook));
-    } */
   };
 
   function handleAddName(e, newName) {
