@@ -20,6 +20,7 @@ const RecipeDisplay = ({
   handleSetCurrentPage,
   uid,
   openConfirmPopup,
+  deleteAndUpdateRecipeBook,
   ...props
 }) => {
   const Recipe = props.props;
@@ -70,8 +71,8 @@ const RecipeDisplay = ({
               aria-label="delete"
               tooltip="Delete"
               onClick={() => {
-                console.log(Recipe.id, uid);
-                openConfirmPopup(deleteRecipe, [uid, Recipe.id], {
+                console.log(uid, Recipe.id);
+                openConfirmPopup(deleteAndUpdateRecipeBook, [uid, Recipe.id], {
                   title: "Delete Recipe",
                   message:
                     "Are you sure you want to permanently delete this recipe?",

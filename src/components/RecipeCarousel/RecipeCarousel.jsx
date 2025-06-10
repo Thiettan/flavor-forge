@@ -7,6 +7,7 @@ export default function RecipeCarousel({
   handleSetCurrentPage,
   uid,
   openConfirmPopup,
+  deleteAndUpdateRecipeBook,
 }) {
   const [activeRecipe, setActiveRecipe] = useState(null);
   /*   const [recipeBook, setRecipeBook] = useState(getLocalStorage("recipeBook")); */
@@ -68,6 +69,7 @@ export default function RecipeCarousel({
               recipeIndex={activeRecipe}
               uid={uid}
               openConfirmPopup={openConfirmPopup}
+              deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
             />
           )}
         </>

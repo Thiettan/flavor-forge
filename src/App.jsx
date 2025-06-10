@@ -13,8 +13,9 @@ import {
 } from "./components/FireBase/firestoreHelpers";
 import SignIn from "./components/FireBase/SignIn";
 import SignOutBtn from "./components/FireBase/SignOutBtn";
-
 import ConfirmPopup from "./components/ui/ConfirmPopup";
+
+import { deleteRecipe } from "./components/FireBase/firestoreHelpers";
 
 // Material UI ////////////////////////////
 import { ThemeProvider } from "@mui/material/styles";
@@ -73,6 +74,12 @@ function App() {
     setHasLoadedRecipes(false);
   }
 
+  const deleteAndUpdateRecipeBook = async (userId, recipeId) => {
+    console.log(user.uid, recipeId);
+    await deleteRecipe(user.uid, recipeId);
+    setRecipeBook((prev) => prev.filter((r) => r.id !== recipeId));
+  };
+
   // Track auth state
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -105,6 +112,7 @@ function App() {
           handleSetCurrentPage={handleSetCurrentPage}
           uid={user.uid}
           openConfirmPopup={openConfirmPopup}
+          deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
         />,
         <RecipeForger
           recipeBook={recipeBook}
