@@ -65,7 +65,7 @@ const RecipeForger = ({
     setIsLoading(true);
 
     const compiledRecipe = {
-      id: tempData?.id || crypto.randomUUID(), //generate unique id
+      id: tempData || crypto.randomUUID(), //generate unique id
       name: name.trim(),
       tag: trimArray(tag), // trimmed array of tag strings
       description: description,
