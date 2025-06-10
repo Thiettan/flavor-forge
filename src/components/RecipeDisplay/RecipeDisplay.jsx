@@ -41,10 +41,12 @@ const RecipeDisplay = ({
       {Recipe ? (
         <div className="RecipeDisplay">
           <div className="container mx-auto p-4">
-            <h2 className="text-6xl">{Recipe.name}</h2>
-            <div className="flex justify-between items-center">
-              <div className="flex justify-between items-center gap-4">
-                {Recipe.createdAt && <RecipeDate date={Recipe.createdAt} />}
+            <h2 className="text-4xl">{Recipe.name}</h2>
+            <p className="date">
+              {Recipe.createdAt && <RecipeDate date={Recipe.createdAt} />}
+            </p>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full">
+              <div className="flex justify-between items-center gap-4 ">
                 <RecipeTagList tag={Recipe.tag} />
               </div>
               <div className="flex justify-between items-center gap-4 text-white">
@@ -109,7 +111,7 @@ const RecipeDisplay = ({
               <img
                 src={Recipe.image}
                 alt={`Preview image of ${Recipe.name}`}
-                className="w-full aspect-[4/3] object-cover rounded-lg"
+                className="w-full aspect-[4/3] object-cover rounded-lg mt-4 sm:mt-0"
               />
             )}
 
