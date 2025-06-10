@@ -34,7 +34,7 @@ const RecipeDisplay = ({
   function handleEditMode() {
     //insert recipe id below or maybe index
 
-    handleSetCurrentPage(1, recipeIndex); //navigates to RecipeForger to edit current recipe
+    handleSetCurrentPage(1, Recipe.id); //navigates to RecipeForger to edit current recipe
   }
 
   return (

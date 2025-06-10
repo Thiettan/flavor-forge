@@ -32,23 +32,20 @@ const RecipeForger = ({
   setTempData,
 }) => {
   /*   const isDev = process.env.NODE_ENV === "development"; */
-  const [name, setName] = useState(
-    tempData == null ? "French Omelette" : recipeBook[tempData].name
-  );
-  const [tag, setTag] = useState(
-    tempData == null ? testTagData : recipeBook[tempData].tag
-  );
+  // Get the full recipe object using the ID stored in tempData
+  const editingRecipe = recipeBook.find((r) => r.id === tempData);
+
+  const [name, setName] = useState(editingRecipe?.name || "French Omelette");
+  const [tag, setTag] = useState(editingRecipe?.tag || testTagData);
   const [description, setDescription] = useState(
-    tempData == null ? "" : recipeBook[tempData].description
+    editingRecipe?.description || ""
   );
-  const [image, setImage] = useState(
-    tempData == null ? null : recipeBook[tempData].image
-  );
+  const [image, setImage] = useState(editingRecipe?.image || null);
   const [ingredients, setIngredients] = useState(
-    tempData == null ? testIngredientData : recipeBook[tempData].ingredients
+    editingRecipe?.ingredients || testIngredientData
   );
   const [directions, setDirections] = useState(
-    tempData == null ? testDirectionData : recipeBook[tempData].directions
+    editingRecipe?.directions || testDirectionData
   );
   const [showPopup, setShowPopup] = useState(false);
 
@@ -68,7 +65,7 @@ const RecipeForger = ({
     setIsLoading(true);
 
     const compiledRecipe = {
-      id: tempData == null ? crypto.randomUUID() : recipeBook[tempData].id, //generate unique id
+      id: tempData?.id || crypto.randomUUID(), //generate unique id
       name: name.trim(),
       tag: trimArray(tag), // trimmed array of tag strings
       description: description,
@@ -83,11 +80,12 @@ const RecipeForger = ({
     // ✅ Update local state
     const isNewRecipe = tempData == null;
 
-    // ✅ Update local state
+    // ✅ Update local state, if newRecipe is true, append to RecipeBook state, else: replaces existing if matches recipe id
     const updatedBook = isNewRecipe
       ? [...recipeBook, compiledRecipe]
-      : recipeBook.map((r, index) => (index === tempData ? compiledRecipe : r));
-
+      : recipeBook.map((r) =>
+          r.id === compiledRecipe.id ? compiledRecipe : r
+        );
     setRecipeBook(updatedBook);
 
     // ✅ Save to Firestore
