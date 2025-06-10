@@ -5,7 +5,6 @@ import IconBtn from "../ui/IconBtn";
 import ToggleBtn from "../ui/ToggleBtn";
 import RecipeDate from "../RecipeDate";
 import { EditableList } from "../EditableList";
-import { deleteRecipe } from "../FireBase/firestoreHelpers";
 /* import EditIcon from "../ui/icons/EditIcon"; */
 /* import PrintIcon from "../ui/icons/PrintIcon"; */
 

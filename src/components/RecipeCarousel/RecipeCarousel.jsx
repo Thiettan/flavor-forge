@@ -5,7 +5,6 @@ import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
 export default function RecipeCarousel({
   recipeBook,
   handleSetCurrentPage,
-  uid,
   openConfirmPopup,
   deleteAndUpdateRecipeBook,
 }) {
