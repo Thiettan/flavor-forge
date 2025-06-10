@@ -16,7 +16,10 @@ import SignOutBtn from "./components/FireBase/SignOutBtn";
 
 import ConfirmPopup from "./components/ui/ConfirmPopup";
 
-import Button from "@mui/material/Button";
+// Material UI ////////////////////////////
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme";
+///////////////////////////////////////////
 
 function App() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -86,7 +89,7 @@ function App() {
   ];
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       {user ? ( //checks if user is signed in
         <>
           <MainMenu
@@ -113,7 +116,7 @@ function App() {
       ) : (
         <SignIn /> //no user detected, sign in page
       )}
-    </>
+    </ThemeProvider>
   );
 }
 

@@ -22,6 +22,7 @@ import testDirectionData from "../../data/recipe-directions-test.json";
 // ========================
 
 import PopupTimed from "../ui/PopupTimed";
+import MUIButton from "@mui/material/Button";
 
 const RecipeForger = ({
   recipeBook,
@@ -51,9 +52,11 @@ const RecipeForger = ({
   );
   const [showPopup, setShowPopup] = useState(false);
 
-  useEffect(() => {
+  const [isLoading, setIsLoading] = useState(false); //tracks and give loading prop for animating Materia btn
+
+  /*   useEffect(() => {
     console.log("Ingredients state updated:", ingredients);
-  }, [ingredients]);
+  }, [ingredients]); */
 
   const handleSaveRecipe = async () => {
     const formValid = true;
@@ -61,6 +64,8 @@ const RecipeForger = ({
       alert("Please fill out all required fields.");
       return;
     }
+
+    setIsLoading(true);
 
     const compiledRecipe = {
       id: tempData == null ? crypto.randomUUID() : recipeBook[tempData].id, //generate unique id
@@ -94,6 +99,7 @@ const RecipeForger = ({
         setTempData(null);
       }
       setShowPopup(true);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error saving recipe:", error);
     }
@@ -177,13 +183,15 @@ const RecipeForger = ({
                 setDirections={setDirections}
               />
 
-              <AddBtn
-                variant="save"
+              <MUIButton
+                variant="contained"
+                loading={isLoading}
+                loadingPosition="start"
                 className="float-right"
                 onClick={handleSaveRecipe}
               >
                 Forge Recipe
-              </AddBtn>
+              </MUIButton>
             </form>
           </div>
           <PopupTimed

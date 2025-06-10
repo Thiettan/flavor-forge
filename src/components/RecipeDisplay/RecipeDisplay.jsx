@@ -3,10 +3,17 @@ import { RecipeTagList } from "../RecipeTagList/RecipeTagList";
 import ActionBtn from "../ui/ActionBtn";
 import IconBtn from "../ui/IconBtn";
 import ToggleBtn from "../ui/ToggleBtn";
-import PrintIcon from "../ui/icons/PrintIcon";
 import RecipeDate from "../RecipeDate";
 import { EditableList } from "../EditableList";
-import EditIcon from "../ui/icons/EditIcon";
+/* import EditIcon from "../ui/icons/EditIcon"; */
+/* import PrintIcon from "../ui/icons/PrintIcon"; */
+
+// Material UI ///////////////////////////////////
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import PrintIcon from "@mui/icons-material/Print";
+import DeleteIcon from "@mui/icons-material/Delete";
+//////////////////////////////////////////////////
 
 const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
   const Recipe = props.props;
@@ -32,24 +39,31 @@ const RecipeDisplay = ({ handleSetCurrentPage, recipeIndex, ...props }) => {
             {Recipe.createdAt && <RecipeDate date={Recipe.createdAt} />}
             <RecipeTagList tag={Recipe.tag} />
           </div>
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex justify-between items-center gap-4 text-white">
             <IconBtn
-              className="primary"
+              aria-label="print"
               tooltip="Print"
-              variant="utility"
               onClick={() => {
                 window.print();
               }}
             >
-              <PrintIcon className="h-[1.5em] w-[1.5em] flex items-center justify-center" />
+              <PrintIcon className="text-white" />
+              {/*       <PrintIcon className="h-[1.5em] w-[1.5em] flex items-center justify-center" /> */}
             </IconBtn>
 
             <IconBtn
+              aria-label="Edit"
               onClick={() => handleEditMode()}
               tooltip="Edit your recipe"
             >
-              <EditIcon className="w-[1.5em] h-[1.5em]" />
+              <EditIcon className="text-white" />
+              {/*   <EditIcon className="w-[1.5em] h-[1.5em]" /> */}
             </IconBtn>
+
+            <IconBtn aria-label="delete" tooltip="Delete">
+              <DeleteIcon className="text-white" />
+            </IconBtn>
+
             <ToggleBtn
               onChange={(e) => {
                 toggleShowCheckbox(e.target.checked);
