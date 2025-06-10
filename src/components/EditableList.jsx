@@ -57,6 +57,7 @@ export const EditableList = ({
   };
 
   const toggleChecked = (index) => {
+    console.log("fired", index);
     setCheckedItems((prev) => ({
       ...prev,
       [index]: !prev[index],
@@ -102,22 +103,33 @@ export const EditableList = ({
               <>
                 <div className="w-full flex items-center gap-2">
                   {showCheckbox ? (
-                    <Checkbox
-                      checked={checkedItems[idx] || false}
-                      onChange={() => toggleChecked(idx)}
-                    />
+                    <label className="flex items-center gap-2 w-full cursor-pointer">
+                      <Checkbox
+                        checked={checkedItems[idx] || false}
+                        onChange={() => toggleChecked(idx)}
+                      />
+                      <span
+                        className={`strike-animate transition-colors duration-300 ${
+                          checkedItems[idx] ? "line-through text-gray-400" : ""
+                        }`}
+                      >
+                        {item}
+                      </span>
+                    </label>
                   ) : (
-                    <span className="text-gray-500 pt-[2px]">
-                      {getItemPrefix ? getItemPrefix(idx) : "•"}
-                    </span>
+                    <>
+                      <span className="text-gray-500 pt-[2px]">
+                        {getItemPrefix ? getItemPrefix(idx) : "•"}
+                      </span>
+                      <span
+                        className={`strike-animate transition-colors duration-300 ${
+                          checkedItems[idx] ? "line-through text-gray-400" : ""
+                        }`}
+                      >
+                        {item}
+                      </span>
+                    </>
                   )}
-                  <span
-                    className={`strike-animate transition-colors duration-300 ${
-                      checkedItems[idx] ? "line-through text-gray-400" : ""
-                    }`}
-                  >
-                    {item}
-                  </span>
                 </div>
                 {editMode && (
                   <div className="flex gap-2 items-center justify-center">
