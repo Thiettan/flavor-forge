@@ -22,6 +22,8 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 ///////////////////////////////////////////
 
+import Test from "./Test";
+
 function App() {
   const [currentPage, setCurrentPage] = useState(0);
   const [recipeBook, setRecipeBook] = useState([]);
@@ -127,6 +129,7 @@ function App() {
     <ThemeProvider theme={theme}>
       {user ? ( //checks if user is signed in
         <>
+          <Test />
           <MainMenu
             currentPage={currentPage}
             handleSetCurrentPage={handleSetCurrentPage}
