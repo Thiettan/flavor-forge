@@ -13,7 +13,6 @@ import {
   verticalListSortingStrategy,
   sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 
 import RemoveBtn from "./ui/RemoveBtn";
 import Checkbox from "./ui/Checkbox";

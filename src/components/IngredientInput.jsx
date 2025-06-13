@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AddBtn from "./ui/AddBtn";
 import Input from "./ui/Input";
-import { IngredientList } from "./IngredientList";
 import { EditableList } from "./EditableList";
 
 const IngredientInput = ({
