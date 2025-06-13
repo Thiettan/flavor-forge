@@ -1,48 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  DndContext,
-  closestCenter,
-  useSensor,
-  useSensors,
-  PointerSensor,
-  KeyboardSensor,
-} from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-  sortableKeyboardCoordinates,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-
 import RemoveBtn from "./ui/RemoveBtn";
 import Checkbox from "./ui/Checkbox";
 import IconBtn from "./ui/IconBtn";
 import EditIcon from "./ui/icons/EditIcon";
-
-// SortableItem wraps each list item and enables drag behavior when editMode is true
-function SortableItem({ id, index, children }) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  return (
-    <li
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      className="relative my-2"
-    >
-      {/* Pass drag listeners to children */}
-      {children({ listeners })}
-    </li>
-  );
-}
 
 export const EditableList = ({
   items,
@@ -58,27 +18,14 @@ export const EditableList = ({
   const [checkedItems, setCheckedItems] = useState({});
   const inputRef = useRef(null);
 
-  // Auto-focus the input when editing starts
   useEffect(() => {
     if (editingIndex !== null && inputRef.current) {
       inputRef.current.focus();
     }
   }, [editingIndex]);
 
-  // Sensors for drag behavior — only active in editMode
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
-
-  const handleRemove = (idxToRemove) => {
-    setItems(items.filter((_, idx) => idx !== idxToRemove));
+  const handleRemove = (itemToRemove) => {
+    setItems(items.filter((item) => item !== itemToRemove));
   };
 
   const handleEditStart = (idx, value) => {
@@ -110,6 +57,7 @@ export const EditableList = ({
   };
 
   const toggleChecked = (index) => {
+    console.log("fired", index);
     setCheckedItems((prev) => ({
       ...prev,
       [index]: !prev[index],
@@ -118,18 +66,10 @@ export const EditableList = ({
 
   const ListTag = isOrdered ? "ol" : "ul";
 
-  const handleDragEnd = ({ active, over }) => {
-    if (active.id !== over?.id) {
-      const oldIndex = items.findIndex((item) => item === active.id);
-      const newIndex = items.findIndex((item) => item === over.id);
-      setItems(arrayMove(items, oldIndex, newIndex));
-    }
-  };
-
-  const renderListItems = () =>
-    items.map((item, idx) => (
-      <SortableItem key={item} id={item} index={idx}>
-        {({ listeners }) => (
+  return (
+    <ListTag className={`mt-4 list-none text-sm pl-0 ${className}`}>
+      {items.map((item, idx) => (
+        <li key={idx} className={`relative my-2 ${showCheckbox ? "flex" : ""}`}>
           <div className="flex justify-between items-start gap-2 w-full">
             {editingIndex === idx ? (
               <div className="flex items-start gap-2 w-full">
@@ -162,16 +102,6 @@ export const EditableList = ({
             ) : (
               <>
                 <div className="w-full flex items-center gap-2">
-                  {editMode && (
-                    <button
-                      type="button"
-                      {...listeners}
-                      className="cursor-grab text-gray-400 hover:text-black"
-                      aria-label="Drag to reorder"
-                    >
-                      ≡
-                    </button>
-                  )}
                   {showCheckbox ? (
                     <label className="flex items-center gap-2 w-full cursor-pointer">
                       <Checkbox
@@ -201,47 +131,19 @@ export const EditableList = ({
                     </>
                   )}
                 </div>
-
                 {editMode && (
                   <div className="flex gap-2 items-center justify-center">
-                    <IconBtn
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEditStart(idx, item);
-                      }}
-                    >
+                    <IconBtn onClick={() => handleEditStart(idx, item)}>
                       <EditIcon className="w-[1.5em] h-[1.5em]" />
                     </IconBtn>
-                    <RemoveBtn
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemove(idx);
-                      }}
-                    />
+                    <RemoveBtn onClick={() => handleRemove(item)} />
                   </div>
                 )}
               </>
             )}
           </div>
-        )}
-      </SortableItem>
-    ));
-
-  return editMode ? (
-    <DndContext
-      sensors={editMode ? sensors : undefined}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
-    >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
-        <ListTag className={`mt-4 list-none text-sm pl-0 ${className}`}>
-          {renderListItems()}
-        </ListTag>
-      </SortableContext>
-    </DndContext>
-  ) : (
-    <ListTag className={`mt-4 list-none text-sm pl-0 ${className}`}>
-      {renderListItems()}
+        </li>
+      ))}
     </ListTag>
   );
 };
