@@ -1,6 +1,9 @@
-export default function RecipeBookCard({ recipe }) {
+export default function RecipeBookCard({ recipe, setActiveRecipe, index }) {
   return (
-    <div className="RecipeBookCard rounded-lg overflow-hidden group cursor-pointer flex flex-col bg-neutral-900">
+    <div
+      className="RecipeBookCard rounded-lg overflow-hidden group cursor-pointer flex flex-col bg-neutral-900"
+      onClick={() => setActiveRecipe(index)}
+    >
       <div className="relative w-full" style={{ paddingTop: "66.66%" }}>
         <img
           src={recipe.image}

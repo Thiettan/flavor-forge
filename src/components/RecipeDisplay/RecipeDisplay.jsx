@@ -20,16 +20,15 @@ const RecipeDisplay = ({
   openConfirmPopup,
   deleteAndUpdateRecipeBook,
   setActiveRecipe,
-  activeRecipe,
+  Recipe,
 }) => {
   console.log(`RecipeDisplay rendered at: ${new Date().toLocaleTimeString()}`);
 
-  const { recipeBook, handleSetCurrentPage } = useFlavorForge(); // ⬅️ get from context
-  const Recipe = recipeBook?.[activeRecipe]; // ⬅️ current active recipe
+  const { handleSetCurrentPage } = useFlavorForge(); // ⬅️ get from context
+  //const Recipe = recipeBook?.[activeRecipe]; // ⬅️ current active recipe
   const [showCheckbox, toggleShowCheckbox] = useState(false);
 
   function handleEditMode() {
-    console.log(Recipe.id);
     handleSetCurrentPage(1, Recipe.id); // ⬅️ navigates to edit view
   }
 

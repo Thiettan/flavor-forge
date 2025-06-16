@@ -81,7 +81,12 @@ function AppContent() {
           setRecipeBook={setRecipeBook}
           user={user}
         />,
-        <RecipeBook recipeBook={recipeBook} />,
+        <RecipeBook
+          recipeBook={recipeBook}
+          setRecipeBook={setRecipeBook}
+          openConfirmPopup={openConfirmPopup}
+          deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
+        />,
       ]
     : [<p>Loading...</p>];
 
@@ -91,14 +96,6 @@ function AppContent() {
         <>
           <MainMenu />
           {AppList[currentPage]}
-          <button
-            onClick={() => {
-              openConfirmPopup();
-            }}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Trigger Popup
-          </button>
           <ConfirmPopup
             isVisible={showPopup}
             title={popupData.title}
