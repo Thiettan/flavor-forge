@@ -28,7 +28,7 @@ import { useFlavorForge } from "../context/FlavorForgeContext";
 const RecipeForger = () => {
   const { user, recipeBook, setRecipeBook, tempData, setTempData } =
     useFlavorForge(); // ✅ use context values
-
+  console.log(`RecipeForger rendered at: ${new Date().toLocaleTimeString()}`);
   /*   const isDev = process.env.NODE_ENV === "development"; */
   // Get the full recipe object using the ID stored in tempData
   const editingRecipe = recipeBook.find((r) => r.id === tempData);
@@ -73,7 +73,7 @@ const RecipeForger = () => {
       createdAt: new Date().toISOString(),
     };
 
-    console.log("[handleSaveRecipe] Compiled recipe:", compiledRecipe);
+    //console.log("[handleSaveRecipe] Compiled recipe:", compiledRecipe);
 
     // ✅ Update local state
     const isNewRecipe = tempData == null;

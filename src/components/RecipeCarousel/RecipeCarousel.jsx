@@ -9,6 +9,7 @@ export default function RecipeCarousel({
   openConfirmPopup,
   deleteAndUpdateRecipeBook,
 }) {
+  console.log(`RecipeCarousel rendered at: ${new Date().toLocaleTimeString()}`);
   const { recipeBook } = useFlavorForge(); // ✅ use context
 
   const [activeRecipe, setActiveRecipe] = useState(null);

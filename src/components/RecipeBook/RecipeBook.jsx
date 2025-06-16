@@ -1,7 +1,7 @@
 import RecipeBookCard from "./RecipeBookCard";
 
 export default function RecipeBook({ recipeBook }) {
-  console.log(recipeBook);
+  console.log(`RecipeBook rendered at: ${new Date().toLocaleTimeString()}`);
   return (
     <div className="RecipeBook">
       <ul className="list-none grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] p-4 gap-4">

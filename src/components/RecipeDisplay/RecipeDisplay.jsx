@@ -22,6 +22,8 @@ const RecipeDisplay = ({
   setActiveRecipe,
   activeRecipe,
 }) => {
+  console.log(`RecipeDisplay rendered at: ${new Date().toLocaleTimeString()}`);
+
   const { recipeBook, handleSetCurrentPage } = useFlavorForge(); // ⬅️ get from context
   const Recipe = recipeBook?.[activeRecipe]; // ⬅️ current active recipe
   const [showCheckbox, toggleShowCheckbox] = useState(false);
