@@ -1,8 +1,8 @@
-export default function MainMenu({
-  currentPage,
-  handleSetCurrentPage,
-  setTempData,
-}) {
+// 🧠 Context
+import { useFlavorForge } from "../context/FlavorForgeContext";
+
+export default function MainMenu() {
+  const { currentPage, handleSetCurrentPage, setTempData } = useFlavorForge(); // ⬅️ get from context
   const menuOptions = ["Recipe Carousel", "Recipe Forge", "Recipe Book"];
   const isActiveCSS = "bg-amber-700";
   const isInactiveCSS = "bg-gray-700";

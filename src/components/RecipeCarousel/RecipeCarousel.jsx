@@ -2,12 +2,15 @@ import { useRef, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import RecipeDisplay from "../RecipeDisplay/RecipeDisplay";
 
+// 🧠 Context
+import { useFlavorForge } from "../context/FlavorForgeContext";
+
 export default function RecipeCarousel({
-  recipeBook,
-  handleSetCurrentPage,
   openConfirmPopup,
   deleteAndUpdateRecipeBook,
 }) {
+  const { recipeBook } = useFlavorForge(); // ✅ use context
+
   const [activeRecipe, setActiveRecipe] = useState(null);
   /*   const [recipeBook, setRecipeBook] = useState(getLocalStorage("recipeBook")); */
   const scrollRef = useRef(null);
@@ -64,11 +67,10 @@ export default function RecipeCarousel({
           {activeRecipe !== null && (
             <RecipeDisplay
               activeRecipe={activeRecipe}
+              setActiveRecipe={setActiveRecipe}
               props={recipeBook[activeRecipe]}
-              handleSetCurrentPage={handleSetCurrentPage}
               openConfirmPopup={openConfirmPopup}
               deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
-              setActiveRecipe={setActiveRecipe}
             />
           )}
         </>

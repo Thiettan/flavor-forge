@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ActionBtn from "./components/ui/ActionBtn";
 import RecipeForger from "./components/RecipeForger/RecipeForger";
 import RecipeDisplay from "./components/RecipeDisplay/RecipeDisplay";
@@ -6,11 +6,6 @@ import MainMenu from "./components/MainMenu/MainMenu";
 import RecipeCarousel from "./components/RecipeCarousel/RecipeCarousel";
 import RecipeBook from "./components/RecipeBook/RecipeBook";
 
-import { auth } from "./components/FireBase/firebase";
-import {
-  getUserRecipes,
-  saveUserRecipes,
-} from "./components/FireBase/firestoreHelpers";
 import SignIn from "./components/FireBase/SignIn";
 import SignOutBtn from "./components/FireBase/SignOutBtn";
 import ConfirmPopup from "./components/ui/ConfirmPopup";
@@ -22,15 +17,14 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
 ///////////////////////////////////////////
 
-import Test from "./Test";
+// Context //////////////////////////////
+import {
+  FlavorForgeProvider,
+  useFlavorForge,
+} from "./components/context/FlavorForgeContext";
+////////////////////////////////////////
 
-function App() {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [recipeBook, setRecipeBook] = useState([]);
-  const [user, setUser] = useState(null);
-  const [hasLoadedRecipes, setHasLoadedRecipes] = useState(false); // ✅ FLAG
-
-  // Popup Management ///////////////////////////
+function AppContent() {
   const [showPopup, setShowPopup] = useState(false);
   const [confirmCallback, setConfirmCallback] = useState(null);
   const [confirmArgs, setConfirmArgs] = useState(null);
@@ -39,6 +33,11 @@ function App() {
     message: "",
     icon: "Success",
   });
+
+  // ✅ From context
+  const { user, recipeBook, setRecipeBook, currentPage } = useFlavorForge();
+
+  // Popup Management ///////////////////////////
   // 1. Call openConfirm to open popup and passes callback fn and arguments for it
   function openConfirmPopup(callback, args = [], options = {}) {
     setConfirmCallback(() => callback);
@@ -53,6 +52,7 @@ function App() {
 
     setShowPopup(true);
   }
+
   // handleConfirm executing callback fn when CONFIRM button is clicked
   function handleConfirm() {
     if (confirmCallback) {
@@ -62,56 +62,17 @@ function App() {
   }
   /////////////////////////////////////////////////
 
-  const [tempData, setTempData] = useState(null);
-  //const [currentMode, setCurrentMode] = useState(null);
-
-  function handleSetCurrentPage(idx, data) {
-    setCurrentPage(idx);
-    if (data != null) setTempData(data);
-  }
-  function handleSignOut() {
-    setCurrentPage(0);
-    setUser(null);
-    setRecipeBook(null);
-    setHasLoadedRecipes(false);
-  }
-
   const deleteAndUpdateRecipeBook = async (recipeId, callback) => {
     await deleteRecipe(user.uid, recipeId);
     setRecipeBook((prev) => prev.filter((r) => r.id !== recipeId));
     if (callback) callback(); // call the callback if provided
   };
 
-  // Track auth state
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      setUser(user);
-      if (user) {
-        const recipes = await getUserRecipes(user.uid);
-        setRecipeBook(recipes || []);
-        setHasLoadedRecipes(true); // ✅ Set true only after data is fetched
-      } else {
-        setRecipeBook([]);
-        setHasLoadedRecipes(false);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // Sync changes to Firestore when recipeBook updates (but only after initial load)
-  useEffect(() => {
-    if (user && hasLoadedRecipes) {
-      saveUserRecipes(user.uid, recipeBook);
-    }
-  }, [recipeBook, user, hasLoadedRecipes]); // ✅ include the flag
-
   const AppList = user
     ? [
         <RecipeCarousel
           recipeBook={recipeBook}
           setRecipeBook={setRecipeBook}
-          handleSetCurrentPage={handleSetCurrentPage}
           openConfirmPopup={openConfirmPopup}
           deleteAndUpdateRecipeBook={deleteAndUpdateRecipeBook}
         />,
@@ -119,22 +80,16 @@ function App() {
           recipeBook={recipeBook}
           setRecipeBook={setRecipeBook}
           user={user}
-          tempData={tempData}
-          setTempData={setTempData}
         />,
         <RecipeBook recipeBook={recipeBook} />,
       ]
     : [<p>Loading...</p>];
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
       {user ? ( //checks if user is signed in
         <>
-          <Test />
-          <MainMenu
-            currentPage={currentPage}
-            handleSetCurrentPage={handleSetCurrentPage}
-            setTempData={setTempData}
-          />
+          <MainMenu />
           {AppList[currentPage]}
           <button
             onClick={() => {
@@ -152,11 +107,21 @@ function App() {
             onConfirm={handleConfirm}
             onClose={() => setShowPopup(false)}
           />
-          <SignOutBtn handleSignOut={handleSignOut} />
+          <SignOutBtn />
         </>
       ) : (
         <SignIn /> //no user detected, sign in page
       )}
+    </>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <FlavorForgeProvider>
+        <AppContent />
+      </FlavorForgeProvider>
     </ThemeProvider>
   );
 }

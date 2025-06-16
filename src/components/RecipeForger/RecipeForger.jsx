@@ -9,10 +9,7 @@ import DirectionsInput from "../DirectionsInput";
 
 // 🔧 Helper Functions ====
 import { trimArray, upsertRecipe } from "../../util/helper-functions";
-import {
-  saveSingleRecipe,
-  updateRecipe,
-} from "../../components/FireBase/firestoreHelpers";
+import { saveSingleRecipe, updateRecipe } from "../FireBase/firestoreHelpers";
 // ========================
 
 // Test Data ==============
@@ -24,13 +21,14 @@ import testDirectionData from "../../data/recipe-directions-test.json";
 import PopupTimed from "../ui/PopupTimed";
 import MUIButton from "@mui/material/Button";
 
-const RecipeForger = ({
-  recipeBook,
-  setRecipeBook,
-  user,
-  tempData,
-  setTempData,
-}) => {
+// 🧠 Context ====
+import { useFlavorForge } from "../context/FlavorForgeContext";
+// ===============
+
+const RecipeForger = () => {
+  const { user, recipeBook, setRecipeBook, tempData, setTempData } =
+    useFlavorForge(); // ✅ use context values
+
   /*   const isDev = process.env.NODE_ENV === "development"; */
   // Get the full recipe object using the ID stored in tempData
   const editingRecipe = recipeBook.find((r) => r.id === tempData);
